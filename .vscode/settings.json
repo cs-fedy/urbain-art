@@ -1,0 +1,22 @@
+{
+	"cSpell.words": ["clsx", "Parens", "tailwindcss"],
+
+	"files.eol": "\n",
+	"editor.formatOnSave": true,
+	"editor.codeActionsOnSave": {
+		"source.organizeImports": true
+	},
+
+	"workbench.editor.closeOnFileDelete": true,
+	"workbench.layoutControl.enabled": false,
+	"workbench.editor.tabCloseButton": "off",
+	"workbench.list.smoothScrolling": true,
+	"workbench.startupEditor": "none",
+
+	"editor.find.addExtraSpaceOnTop": false,
+	"editor.renderWhitespace": "boundary",
+	"editor.inlineSuggest.enabled": false,
+	"editor.accessibilitySupport": "off",
+	"editor.insertSpaces": true,
+	"editor.tabSize": 2
+}

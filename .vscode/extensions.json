@@ -1,0 +1,22 @@
+{
+	"recommendations": [
+		"streetsidesoftware.code-spell-checker",
+		"Cardinal90.multi-cursor-case-preserve",
+		"christian-kohler.path-intellisense",
+		"christian-kohler.npm-intellisense",
+		"vincaslt.highlight-matching-tag",
+		"deque-systems.vscode-axe-linter",
+		"formulahendry.auto-rename-tag",
+		"formulahendry.auto-close-tag",
+		"aaron-bond.better-comments",
+		"bradlc.vscode-tailwindcss",
+		"yoavbls.pretty-ts-errors",
+		"dbaeumer.vscode-eslint",
+		"esbenp.prettier-vscode",
+		"mohsen1.prettify-json",
+		"ecmel.vscode-html-css",
+		"antfu.theme-vitesse",
+		"redhat.vscode-yaml",
+		"mikestead.dotenv"
+	]
+}
