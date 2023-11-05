@@ -8,7 +8,7 @@ import NavbarItem from "./navbar_item"
 export default function Navbar() {
 	return (
 		<div className='fixed inset-x-0 top-0 z-20 bg-urbain-black/90'>
-			<div className='mx-auto flex w-11/12 items-center justify-between py-3'>
+			<div className='mx-auto flex w-10/12 items-center justify-between py-3'>
 				<Image src={logo} alt='urbain art logo' width={43} height={53} />
 
 				<nav className='flex items-center space-x-8'>
