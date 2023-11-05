@@ -16,7 +16,7 @@ export default function NavbarItem({
 		<a
 			href={href}
 			className={cn(
-				"border-urbain-orange font-montserrat text-sm font-normal capitalize leading-snug tracking-wider text-urbain-white duration-200 ease-in-out hover:border-b-4",
+				"w-max border-urbain-orange font-montserrat text-sm font-normal capitalize leading-snug tracking-wider text-urbain-white duration-200 ease-in-out hover:border-b-4",
 				pathname === href && "border-b-4",
 				className,
 			)}
