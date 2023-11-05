@@ -2,7 +2,9 @@ import logo from "@/../public/svg/logo.svg"
 import Box from "@/components/common/box"
 import Icon from "@/components/common/icon"
 import ChevronDownIcon from "@/components/icons/chevron_down"
+import ShoppingCartIcon from "@/components/icons/shopping_cart"
 import Image from "next/image"
+import Link from "next/link"
 import NavbarItem from "./navbar_item"
 
 export default function Navbar() {
@@ -27,9 +29,17 @@ export default function Navbar() {
 					<NavbarItem href='/contact'>contact</NavbarItem>
 				</nav>
 
-				<Box component='button' variant='primary'>
-					Demendez un devis
-				</Box>
+				<div className='flex items-center space-x-8'>
+					<Link href='/cart'>
+						<Icon
+							icon={<ShoppingCartIcon />}
+							className='h-[34px] w-[35px] text-urbain-white'
+						/>
+					</Link>
+					<Box component='button' variant='primary'>
+						Demendez un devis
+					</Box>
+				</div>
 			</div>
 		</div>
 	)
