@@ -40,7 +40,7 @@ export default function Navbar() {
 				<div
 					className={cn(
 						isOpen ? "fixed" : "hidden",
-						"inset-0 bg-urbain-black py-7 lg:hidden",
+						"inset-0 overflow-auto bg-urbain-black py-7 lg:hidden",
 					)}>
 					<div className='mx-auto flex w-10/12 justify-end'>
 						<button type='button' onClick={() => setOpen(false)}>
