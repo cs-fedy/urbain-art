@@ -6,7 +6,7 @@ export default function SliderDot({ isCurrent }: SliderDotProps) {
 	return (
 		<div
 			className={cn(
-				"h-4 w-4 rounded-full",
+				"h-2 w-2 rounded-full lg:h-4 lg:w-4",
 				isCurrent ? "bg-urbain-orange" : "bg-urbain-white",
 			)}
 		/>

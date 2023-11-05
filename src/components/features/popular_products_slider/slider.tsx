@@ -25,6 +25,7 @@ const images = [
 
 const MAX_SLIDES = 8
 const SLIDING_INTERVAL = 1300
+// TODO: to be fixed
 
 export default function Slider() {
 	const [currentSlide, setCurrentSlide] = useState(0)

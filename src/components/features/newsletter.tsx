@@ -16,7 +16,7 @@ export default function Newsletter() {
 				/>
 			</div>
 
-			<div className='mx-20 flex flex-col items-center space-y-12 py-10 lg:items-start lg:py-0'>
+			<div className='mx-20 flex flex-col items-center gap-y-12 py-10 lg:items-start lg:py-0'>
 				<div className='flex flex-col items-center space-y-2 lg:items-start'>
 					<h2 className='w-full text-center font-play-fair text-3xl leading-snug tracking-wider text-urbain-white sm:text-4xl md:text-5xl lg:max-w-2xl lg:text-left lg:text-6xl'>
 						Rejoignez notre Newsletter

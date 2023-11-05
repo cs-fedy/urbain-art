@@ -19,10 +19,10 @@ export default function ProductItem({ image, title, items }: ProductItemProps) {
 
 			<div className='flex w-full flex-col items-center space-y-6 p-4 font-medium'>
 				<div className='flex w-full flex-col items-start space-y-2'>
-					<h3 className='font-montserrat text-2xl text-urbain-black'>
+					<h3 className='font-montserrat text-lg text-urbain-black md:text-xl lg:text-2xl'>
 						{title}
 					</h3>
-					<span className='text-xl text-urbain-black'>
+					<span className='text-base text-urbain-black md:text-lg lg:text-xl'>
 						{items === 1 ? "une place" : `${items} places`}
 					</span>
 				</div>
