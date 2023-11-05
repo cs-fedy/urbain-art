@@ -335,7 +335,7 @@ export default function Categories() {
 	return (
 		<div
 			ref={containerRef}
-			className='fixed right-0 top-0 z-20 h-screen bg-urbain-black'>
+			className='fixed right-0 top-0 z-20 hidden h-screen bg-urbain-black lg:block'>
 			<div className='flex h-full px-5 pb-16 pt-32'>
 				{selectedTag !== "" && selectedCategory && (
 					<div ref={ref} className='h-full w-96'>

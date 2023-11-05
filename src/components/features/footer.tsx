@@ -12,8 +12,8 @@ import PhoneIcon from "../icons/phone"
 export default function Footer() {
 	return (
 		<footer className='w-full bg-urbain-black'>
-			<div className='mx-auto flex w-11/12 items-center justify-between py-10'>
-				<div className='flex flex-col items-start space-y-8 pr-16'>
+			<div className='mx-auto flex w-11/12 flex-col items-center justify-between gap-y-20 py-20 md:py-10 lg:flex-row'>
+				<div className='flex w-full flex-col items-start space-y-8 lg:w-max'>
 					<div className='flex w-full flex-col items-start space-y-5'>
 						<Image
 							src={horizontalLogo}
@@ -21,6 +21,7 @@ export default function Footer() {
 							width={530}
 							height={137}
 						/>
+
 						<div className='ml-5 flex items-center space-x-2'>
 							<Link href='/'>
 								<Icon
@@ -42,8 +43,9 @@ export default function Footer() {
 							</Link>
 						</div>
 					</div>
+
 					<div className='flex w-full flex-col items-start space-y-6'>
-						<span className='max-w-sm text-lg leading-snug tracking-wider text-urbain-white'>
+						<span className='max-w-xs text-sm leading-snug tracking-wider text-urbain-white md:text-base lg:text-lg'>
 							Lorem Ipsum is simply dummy text of the printing and typesetting
 							industry. Lorem Ipsum has been the industry&apos;s standard dummy
 							text ever sinc
@@ -55,7 +57,7 @@ export default function Footer() {
 								className='h-5 w-5 text-urbain-white'
 							/>
 
-							<span className='text-lg leading-snug tracking-wider text-urbain-white'>
+							<span className='text-sm leading-snug tracking-wider text-urbain-white md:text-base lg:text-lg'>
 								+(216) 59 66 88 25
 							</span>
 						</div>
@@ -66,46 +68,46 @@ export default function Footer() {
 								className='h-5 w-5 text-urbain-white'
 							/>
 
-							<span className='text-lg leading-snug tracking-wider text-urbain-white'>
+							<span className='text-sm leading-snug tracking-wider text-urbain-white md:text-base lg:text-lg'>
 								Sammari.hamza@gmail.com
 							</span>
 						</div>
 					</div>
 				</div>
 
-				<div className='flex w-full justify-center'>
-					<div className='mx-auto grid grid-cols-3 items-start space-x-10'>
+				<div className='flex w-full lg:justify-center'>
+					<div className='grid grid-cols-1 items-start gap-10 md:grid-cols-2 xl:grid-cols-3'>
 						<div className='flex flex-col items-start space-y-10'>
-							<h3 className='text-3xl font-black uppercase leading-snug tracking-wide text-urbain-white'>
+							<h3 className='text-xl font-black uppercase leading-snug tracking-wide text-urbain-white md:text-2xl lg:text-3xl'>
 								Découvrez
 							</h3>
 
 							<div role='list' className='flex flex-col items-start space-y-3'>
 								<Link
 									href='/'
-									className='font-medium capitalize leading-snug tracking-wider text-urbain-white duration-200 ease-in-out hover:underline'>
+									className='text-sm font-medium capitalize leading-snug tracking-wider text-urbain-white duration-200 ease-in-out hover:underline md:text-base lg:text-lg'>
 									acceuil
 								</Link>
 								<Link
 									href='/products'
-									className='font-medium capitalize leading-snug tracking-wider text-urbain-white duration-200 ease-in-out hover:underline'>
+									className='text-sm font-medium capitalize leading-snug tracking-wider text-urbain-white duration-200 ease-in-out hover:underline md:text-base lg:text-lg'>
 									nos produits
 								</Link>
 								<Link
 									href='/about'
-									className='font-medium capitalize leading-snug tracking-wider text-urbain-white duration-200 ease-in-out hover:underline'>
+									className='text-sm font-medium capitalize leading-snug tracking-wider text-urbain-white duration-200 ease-in-out hover:underline md:text-base lg:text-lg'>
 									a propos
 								</Link>
 								<Link
 									href='/contact'
-									className='font-medium capitalize leading-snug tracking-wider text-urbain-white duration-200 ease-in-out hover:underline'>
+									className='text-sm font-medium capitalize leading-snug tracking-wider text-urbain-white duration-200 ease-in-out hover:underline md:text-base lg:text-lg'>
 									contact
 								</Link>
 							</div>
 						</div>
 
 						<div className='flex flex-col items-start space-y-10'>
-							<h3 className='text-3xl font-black uppercase leading-snug tracking-wide text-urbain-white'>
+							<h3 className='text-xl font-black uppercase leading-snug tracking-wide text-urbain-white md:text-2xl lg:text-3xl'>
 								nos produits
 							</h3>
 
@@ -114,27 +116,27 @@ export default function Footer() {
 								className='flex w-full flex-col items-start justify-between space-y-3'>
 								<Link
 									href='/products/meuble_bureau'
-									className='font-medium capitalize leading-snug tracking-wider text-urbain-white duration-200 ease-in-out hover:underline'>
+									className='text-sm font-medium capitalize leading-snug tracking-wider text-urbain-white duration-200 ease-in-out hover:underline md:text-base lg:text-lg'>
 									meuble bureau
 								</Link>
 								<Link
 									href='/products/meuble_open_space'
-									className='font-medium capitalize leading-snug tracking-wider text-urbain-white duration-200 ease-in-out hover:underline'>
+									className='text-sm font-medium capitalize leading-snug tracking-wider text-urbain-white duration-200 ease-in-out hover:underline md:text-base lg:text-lg'>
 									meuble open space
 								</Link>
 								<Link
 									href='/products/meuble_event'
-									className='font-medium capitalize leading-snug tracking-wider text-urbain-white duration-200 ease-in-out hover:underline'>
+									className='text-sm font-medium capitalize leading-snug tracking-wider text-urbain-white duration-200 ease-in-out hover:underline md:text-base lg:text-lg'>
 									meuble évènement
 								</Link>
 								<Link
 									href='/products/siege'
-									className='font-medium capitalize leading-snug tracking-wider text-urbain-white duration-200 ease-in-out hover:underline'>
+									className='text-sm font-medium capitalize leading-snug tracking-wider text-urbain-white duration-200 ease-in-out hover:underline md:text-base lg:text-lg'>
 									siège
 								</Link>
 								<Link
 									href='/products/accessories'
-									className='font-medium capitalize leading-snug tracking-wider text-urbain-white duration-200 ease-in-out hover:underline'>
+									className='text-sm font-medium capitalize leading-snug tracking-wider text-urbain-white duration-200 ease-in-out hover:underline md:text-base lg:text-lg'>
 									accessoires
 								</Link>
 							</div>
@@ -142,11 +144,11 @@ export default function Footer() {
 
 						<div className='flex flex-col items-start space-y-10'>
 							<div className='flex flex-col items-start space-y-6'>
-								<h3 className='text-3xl font-black uppercase leading-snug tracking-wide text-urbain-white'>
-									demandez un devis
+								<h3 className='text-xl font-black uppercase leading-snug tracking-wide text-urbain-white md:text-2xl lg:text-3xl'>
+									demandez <br /> un devis
 								</h3>
 
-								<p className='max-w-xs text-left font-montserrat text-lg font-normal leading-snug tracking-wider text-urbain-white'>
+								<p className='max-w-xs text-left font-montserrat text-sm font-normal leading-snug tracking-wider text-urbain-white md:text-base lg:text-lg'>
 									Demandez un devis spécifique pour le produit qui vous convient
 								</p>
 							</div>

@@ -22,7 +22,7 @@ export default function Button<T extends ElementType = "span">({
 		<Component
 			{...rest}
 			className={cn(
-				"flex items-center space-x-3 rounded-md px-6 py-3 font-montserrat text-sm font-normal leading-normal tracking-normal text-urbain-white",
+				"flex items-center space-x-3 rounded-md px-6 py-3 font-montserrat text-xs font-normal leading-normal tracking-normal text-urbain-white lg:text-sm",
 				variant === "primary" && "bg-urbain-orange hover:bg-orange-700",
 				variant === "secondary" && "bg-urbain-black hover:bg-slate-900",
 				className,
