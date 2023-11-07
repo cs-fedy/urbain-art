@@ -1,9 +1,24 @@
+"use client"
+
 import newsletter from "@/../public/images/newsletter.jpg"
 import Box from "@/components/common/box"
 import Input from "@/components/common/input"
+import { JoinNewsletterResult } from "@/lib/api"
 import Image from "next/image"
+import { useFormState, useFormStatus } from "react-dom"
 
-export default function Newsletter() {
+type NewsletterFormWrapperProps = {
+	formAction: (state: any, formData: FormData) => Promise<JoinNewsletterResult>
+}
+
+const initialValue = { email: "" }
+
+export default function WrappedNewsletter({
+	formAction,
+}: NewsletterFormWrapperProps) {
+	const { pending } = useFormStatus()
+	const [state, action] = useFormState(formAction, initialValue)
+
 	return (
 		<div className='relative flex w-full flex-col-reverse items-center gap-y-16 bg-urbain-black lg:flex-row'>
 			<div className='w-full lg:w-1/2'>
@@ -26,19 +41,26 @@ export default function Newsletter() {
 					</span>
 				</div>
 
-				<div className='flex w-full flex-col items-center space-y-8 lg:w-3/4 lg:items-start'>
+				<form
+					action={action}
+					className='flex w-full flex-col items-center space-y-8 lg:w-3/4 lg:items-start'>
 					<Input
 						type='email'
 						name='email'
 						placeholder='Enter your email'
 						className='w-full rounded-lg text-white lg:w-max'
+						error={!state.ok && state.error?.message}
 					/>
 					<Box
+						type='submit'
 						component='button'
+						disabled={pending}
 						className='w-full bg-urbain-white text-urbain-black hover:bg-slate-100 lg:w-max'>
-						<span className='w-full text-center'>S’inscrire</span>
+						<span className='w-full text-center'>
+							{pending ? "en cours de soumission" : "S’inscrire"}
+						</span>
 					</Box>
-				</div>
+				</form>
 			</div>
 		</div>
 	)

@@ -1,9 +1,10 @@
 import cn from "@/utils/cn"
-import { ComponentProps, ReactNode } from "react"
+import { ClassName } from "@/utils/types"
+import { ReactNode } from "react"
 
 type IconProps = {
 	icon: ReactNode
-	className?: ComponentProps<"span">["className"]
+	className?: ClassName
 }
 
 export default function Icon({ icon, className }: IconProps) {

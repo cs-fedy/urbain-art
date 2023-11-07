@@ -38,7 +38,7 @@ export default function Slider({
 				{items.slice(offset, offset + itemsPerWindow).map(child => child)}
 			</div>
 			<div className='hidden h-4 w-full rounded-md bg-urbain-black lg:block' />
-			<div className='absolute top-1/2 flex w-full -translate-y-1/2 items-center justify-between space-x-2 px-8 lg:static lg:translate-y-0'>
+			<div className='absolute top-1/2 flex w-full -translate-y-1/2 items-center justify-between space-x-2 px-8 lg:static lg:translate-y-0 lg:justify-end'>
 				<button
 					onClick={() => handleChangeOffset(-1)}
 					className='flex h-10 w-10 items-center justify-center rounded-full bg-urbain-black hover:bg-slate-900'>

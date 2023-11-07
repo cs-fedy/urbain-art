@@ -18,7 +18,7 @@ export default function Navbar() {
 
 	return (
 		<div className='fixed inset-x-0 top-0 z-20 bg-urbain-black/90'>
-			<div className='relative mx-auto flex w-10/12 items-center justify-between py-3'>
+			<div className='relative mx-auto flex w-11/12 items-center justify-between py-3 lg:w-10/12'>
 				<Image src={logo} alt='urbain art logo' width={43} height={53} />
 
 				<nav className='hidden items-center space-x-8 lg:flex'>
@@ -42,7 +42,7 @@ export default function Navbar() {
 						isOpen ? "fixed" : "hidden",
 						"inset-0 overflow-auto bg-urbain-black py-7 lg:hidden",
 					)}>
-					<div className='mx-auto flex w-10/12 justify-end'>
+					<div className='mx-auto flex w-11/12 justify-end'>
 						<button type='button' onClick={() => setOpen(false)}>
 							<Icon
 								icon={<XMarkIcon />}
@@ -68,11 +68,11 @@ export default function Navbar() {
 					</nav>
 				</div>
 
-				<div className='flex items-center space-x-8'>
+				<div className='flex items-center space-x-4 lg:space-x-8'>
 					<Link href='/cart'>
 						<Icon
 							icon={<ShoppingCartIcon />}
-							className='h-[34px] w-[35px] text-urbain-white'
+							className='h-[26px] w-[27px] text-urbain-white lg:h-[34px] lg:w-[35px]'
 						/>
 					</Link>
 					<Box component='button' variant='primary'>

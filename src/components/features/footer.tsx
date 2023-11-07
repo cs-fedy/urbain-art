@@ -1,5 +1,6 @@
 import horizontalLogo from "@/../public/svg/horizontal_logo.svg"
 import Box from "@/components/common/box"
+import { listCategories } from "@/lib/api"
 import Image from "next/image"
 import Link from "next/link"
 import Icon from "../common/icon"
@@ -9,7 +10,12 @@ import InstagramIcon from "../icons/instagram"
 import LinkedinIcon from "../icons/linkedin"
 import PhoneIcon from "../icons/phone"
 
-export default function Footer() {
+export default async function Footer() {
+	const categories = await listCategories({
+		limit: 5,
+		fields: ["title"],
+	})
+
 	return (
 		<footer className='w-full bg-urbain-black'>
 			<div className='mx-auto flex w-11/12 flex-col items-center justify-between gap-y-20 py-20 md:py-10 lg:flex-row'>
@@ -111,35 +117,20 @@ export default function Footer() {
 								nos produits
 							</h3>
 
-							<div
-								role='list'
-								className='flex w-full flex-col items-start justify-between space-y-3'>
-								<Link
-									href='/products/meuble_bureau'
-									className='text-sm font-medium capitalize leading-snug tracking-wider text-urbain-white duration-200 ease-in-out hover:underline md:text-base lg:text-lg'>
-									meuble bureau
-								</Link>
-								<Link
-									href='/products/meuble_open_space'
-									className='text-sm font-medium capitalize leading-snug tracking-wider text-urbain-white duration-200 ease-in-out hover:underline md:text-base lg:text-lg'>
-									meuble open space
-								</Link>
-								<Link
-									href='/products/meuble_event'
-									className='text-sm font-medium capitalize leading-snug tracking-wider text-urbain-white duration-200 ease-in-out hover:underline md:text-base lg:text-lg'>
-									meuble évènement
-								</Link>
-								<Link
-									href='/products/siege'
-									className='text-sm font-medium capitalize leading-snug tracking-wider text-urbain-white duration-200 ease-in-out hover:underline md:text-base lg:text-lg'>
-									siège
-								</Link>
-								<Link
-									href='/products/accessories'
-									className='text-sm font-medium capitalize leading-snug tracking-wider text-urbain-white duration-200 ease-in-out hover:underline md:text-base lg:text-lg'>
-									accessoires
-								</Link>
-							</div>
+							{categories.ok && (
+								<div
+									role='list'
+									className='flex w-full flex-col items-start justify-between space-y-3'>
+									{categories.data.categories.map(category => (
+										<Link
+											key={category.id}
+											href={category.link}
+											className='text-sm font-medium capitalize leading-snug tracking-wider text-urbain-white duration-200 ease-in-out hover:underline md:text-base lg:text-lg'>
+											{category.title}
+										</Link>
+									))}
+								</div>
+							)}
 						</div>
 
 						<div className='flex flex-col items-start space-y-10'>

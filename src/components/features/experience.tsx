@@ -13,7 +13,7 @@ export default function Experience() {
 					<Image src={logo} alt='urbain art gray logo' fill />
 				</div>
 
-				<h2 className='w-full text-center font-play-fair text-3xl leading-snug tracking-wider text-urbain-white sm:text-4xl md:text-5xl lg:max-w-2xl lg:text-left lg:text-6xl'>
+				<h2 className='w-full text-center font-play-fair text-3xl leading-snug tracking-wider text-urbain-white sm:text-4xl md:text-5xl lg:max-w-2xl lg:text-6xl'>
 					Plus que{" "}
 					<span className='text-urbain-orange'>25 ans d&apos;expérience</span>,
 					toujours avec les mêmes valeurs

@@ -13,12 +13,7 @@ export default function CategoryItem({
 	const image = category.image as StaticImageData
 	return (
 		<button type='button' onClick={() => handleClick(category.tag)}>
-			<Image
-				src={image}
-				alt={category.title}
-				width={image.width}
-				height={image.height}
-			/>
+			<Image src={image} alt={category.title} width={50} height={70} />
 		</button>
 	)
 }

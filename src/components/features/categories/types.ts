@@ -1,18 +1,25 @@
-import { StaticImageData } from "next/image"
-import { ReactNode } from "react"
+import { Image } from "@/utils/types"
 
 export interface SubCategory {
-	id: string
+	id: number
 	tag: string
 	title: string
 	link: string
+	createdAt: Date
+	updatedAt: Date
+	publishedAt: Date
 }
 
 export interface Category {
-	id: string
+	id: number
 	tag: string
 	title: string
 	link: string
-	image: StaticImageData | string | ReactNode
+	image: Image
 	items: Array<SubCategory>
+	createdAt: Date
+	updatedAt: Date
+	publishedAt: Date
 }
+
+export type Categories = Array<Category>
