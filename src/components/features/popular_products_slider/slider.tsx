@@ -42,7 +42,7 @@ export default function Slider() {
 	}, [])
 
 	return (
-		<header className='relative h-screen w-full overflow-hidden'>
+		<header className='relative h-max w-full overflow-hidden pt-[4.75rem] lg:h-screen lg:pt-0'>
 			<div className='absolute inset-0 z-0 bg-urbain-black/50' />
 			<Image
 				src={images[currentSlide]}

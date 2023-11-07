@@ -17,7 +17,7 @@ export default function Navbar() {
 	const [isOpen, setOpen] = useState(false)
 
 	return (
-		<div className='fixed inset-x-0 top-0 z-20 bg-urbain-black/90'>
+		<div className='fixed inset-x-0 top-0 z-20 bg-urbain-black lg:bg-urbain-black/90'>
 			<div className='relative mx-auto flex w-11/12 items-center justify-between py-3 lg:w-10/12'>
 				<Image src={logo} alt='urbain art logo' width={43} height={53} />
 
