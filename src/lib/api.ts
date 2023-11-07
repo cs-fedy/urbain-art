@@ -1,5 +1,6 @@
 import { Categories, SubCategory } from "@/components/features/categories/types"
 import { Newsletter } from "@/components/features/newsletter/types"
+import { Slides } from "@/components/features/popular_products_slider/types"
 import { Products } from "@/components/features/product/types"
 
 const baseStrapiApiUrl =
@@ -176,7 +177,50 @@ export async function listProducts(
 			ok: false,
 			error: {
 				name: "Error",
-				message: "An error happened while fetching categories",
+				message: "An error happened while fetching products",
+			},
+		}
+	}
+}
+
+type ListProductsSlidesResult =
+	| { ok: true; data: { slides: Slides } }
+	| { ok: false; error: { name: string; message: string } }
+
+export async function listProductsSlides(): Promise<ListProductsSlidesResult> {
+	try {
+		const response = await fetch(
+			baseStrapiApiUrl + "/api/products-sliders?populate=*",
+		)
+		const { data }: { data: Array<any> } = await response.json()
+
+		return {
+			ok: true,
+			data: {
+				slides: data.map(curr => {
+					return {
+						id: curr.id,
+						tag: curr.attributes.tag,
+						createdAt:
+							curr.attributes.createdAt && new Date(curr.attributes.createdAt),
+						updatedAt:
+							curr.attributes.createdAt && new Date(curr.attributes.updatedAt),
+						publishedAt:
+							curr.attributes.createdAt &&
+							new Date(curr.attributes.publishedAt),
+						slide:
+							curr.attributes.slide &&
+							`${baseStrapiApiUrl}${curr.attributes.slide.data.attributes.url}`,
+					}
+				}),
+			},
+		}
+	} catch (e) {
+		return {
+			ok: false,
+			error: {
+				name: "Error",
+				message: "An error happened while fetching products",
 			},
 		}
 	}
