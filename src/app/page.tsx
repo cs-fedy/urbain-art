@@ -4,7 +4,7 @@ import Newsletter from "@/components/features/newsletter/newsletter"
 import PopularProducts from "@/components/features/popular_products/popular_products"
 import Slider from "@/components/features/popular_products_slider/slider"
 
-export default function Home() {
+export default function HomePage() {
 	return (
 		<main className='w-full'>
 			<Slider />
