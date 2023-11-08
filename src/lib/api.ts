@@ -92,7 +92,7 @@ export async function listCategories(
 							new Date(curr.attributes.publishedAt),
 						link: `/categories/${curr.attributes.tag}`,
 						image:
-							curr.attributes.image &&
+							curr.attributes.image?.data[0] &&
 							`${baseStrapiApiUrl}${curr.attributes.image.data[0].attributes.url}`,
 						items:
 							curr.attributes.sub_categories &&
