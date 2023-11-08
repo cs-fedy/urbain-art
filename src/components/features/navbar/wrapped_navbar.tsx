@@ -12,11 +12,12 @@ import Image from "next/image"
 import Link from "next/link"
 import { useState } from "react"
 import { Categories } from "../categories/types"
+import CategoriesMobileDropdown from "./categories_mobile_dropdown"
 import Dropdown from "./dropdown"
 import NavbarItem from "./navbar_item"
 
 type WrappedNavbarProps = { categories: Categories }
-// TODO: products menu for mobile screens
+
 export default function WrappedNavbar({ categories }: WrappedNavbarProps) {
 	const [isOpen, setOpen] = useState(false)
 
@@ -27,7 +28,7 @@ export default function WrappedNavbar({ categories }: WrappedNavbarProps) {
 
 				<nav className='hidden items-center space-x-8 lg:flex'>
 					<NavbarItem href='/'>Acceuil</NavbarItem>
-					<NavbarItem href='/products'>
+					<NavbarItem>
 						<div className='group relative'>
 							<div className='flex items-center space-x-1'>
 								<span className='text-sm'>no produits</span>
@@ -63,15 +64,7 @@ export default function WrappedNavbar({ categories }: WrappedNavbarProps) {
 
 					<nav className='mx-auto my-16 flex w-10/12 flex-col space-y-10'>
 						<NavbarItem href='/'>Acceuil</NavbarItem>
-						<NavbarItem href='/products'>
-							<div className='flex items-center space-x-1'>
-								<span className='text-sm'>no produits</span>
-								<Icon
-									icon={<ChevronDownIcon />}
-									className='h-4 w-4 text-urbain-white'
-								/>
-							</div>
-						</NavbarItem>
+						<CategoriesMobileDropdown categories={categories} />
 						<NavbarItem href='/about'>a propos</NavbarItem>
 						<NavbarItem href='/catalog'>catalogue</NavbarItem>
 						<NavbarItem href='/contact'>contact</NavbarItem>
