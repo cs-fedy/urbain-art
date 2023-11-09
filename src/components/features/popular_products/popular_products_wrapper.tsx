@@ -2,7 +2,7 @@ import chair from "@/../public/images/chair.png"
 import grayLogo from "@/../public/svg/gray_logo.svg"
 import Image from "next/image"
 import { PropsWithChildren } from "react"
-import Slider from "./slider"
+import Slider from "../../common/slider"
 
 const MAX_ITEMS_PER_WINDOW = 4
 

@@ -1,10 +1,10 @@
 import grayLogo from "@/../public/svg/gray_logo.svg"
 import Box from "@/components/common/box"
+import Slider from "@/components/common/slider"
 import { listMembers } from "@/lib/api"
 import Image from "next/image"
 import TeamMember from "./team_member"
 
-// TODO: make it responsive the members cards
 export default async function Team() {
 	const members = await listMembers({ limit: 4 })
 
@@ -12,7 +12,7 @@ export default async function Team() {
 
 	return (
 		<div className='relative w-full overflow-hidden lg:h-screen'>
-			<div className='mx-auto flex h-full w-4/5 flex-col items-center gap-y-12 py-16 lg:pt-32'>
+			<div className='mx-auto flex h-full w-4/5 flex-col items-center justify-between gap-y-12 py-16 lg:pt-32'>
 				<div className='absolute -bottom-28 -left-48 hidden h-[54rem] w-[45rem] lg:block'>
 					<Image src={grayLogo} alt='urbain art gray logo' fill />
 				</div>
@@ -22,14 +22,22 @@ export default async function Team() {
 				</h2>
 
 				<div className='flex w-full flex-col items-center gap-y-8'>
-					<div className='hidden w-full grid-cols-4 justify-between lg:grid'>
+					<div className='hidden w-full grid-cols-4 justify-between gap-x-4 lg:grid'>
 						{members.data.members.map(member => (
 							<TeamMember key={member.id} member={member} />
 						))}
 					</div>
 
+					<div className='w-full lg:hidden'>
+						<Slider itemsPerWindow={1}>
+							{members.data.members.map(member => (
+								<TeamMember key={member.id} member={member} />
+							))}
+						</Slider>
+					</div>
+
 					<Box component='a' href='/contact_us' variant='primary'>
-						Contacter l’équipe
+						Contacter l&apos;équipe
 					</Box>
 				</div>
 			</div>

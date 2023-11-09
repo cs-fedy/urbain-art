@@ -19,6 +19,9 @@ const config: Config = {
 					black: "#000000",
 				},
 			},
+			backgroundImage: {
+				services: "url(/images/services.jpg)",
+			},
 		},
 	},
 	plugins: [],
