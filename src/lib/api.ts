@@ -91,7 +91,6 @@ export async function listCategories(
 						publishedAt:
 							curr.attributes.createdAt &&
 							new Date(curr.attributes.publishedAt),
-						link: `/categories/${curr.attributes.tag}`,
 						image:
 							curr.attributes.image?.data[0] &&
 							`${baseStrapiApiUrl}${curr.attributes.image.data[0].attributes.url}`,
@@ -103,7 +102,8 @@ export async function listCategories(
 										id: rawSubCategory.id,
 										tag: rawSubCategory.attributes.tag,
 										title: rawSubCategory.attributes.title,
-										link: `/categories/${curr.attributes.tag}/${rawSubCategory.attributes.tag}`,
+										description: rawSubCategory.description,
+										link: `/${rawSubCategory.attributes.tag}`,
 										createdAt: new Date(rawSubCategory.attributes.createdAt),
 										updatedAt: new Date(rawSubCategory.attributes.updatedAt),
 										publishedAt: new Date(
@@ -127,7 +127,10 @@ export async function listCategories(
 	}
 }
 
-type ListProductsArgs = { limit?: number }
+type ListProductsArgs = {
+	limit?: number
+	filter?: { subCategory?: string }
+}
 
 type ListProductsResult =
 	| { ok: true; data: { products: Products } }
@@ -138,6 +141,8 @@ export async function listProducts(
 ): Promise<ListProductsResult> {
 	let url = baseStrapiApiUrl + "/api/products?populate=*"
 	if (args?.limit) url += `&pagination[pageSize]=${args.limit}`
+	if (args?.filter?.subCategory)
+		url += `&filters[sub_category][tag]=${args.filter.subCategory}`
 
 	try {
 		const response = await fetch(url)
@@ -272,6 +277,48 @@ export async function listMembers(
 			error: {
 				name: "Error",
 				message: "An error happened while fetching members",
+			},
+		}
+	}
+}
+
+type GetSubCategoryResult =
+	| { ok: true; data: { subCategory: SubCategory } }
+	| { ok: false; error: { name: string; message: string } }
+
+type GetSubCategoryArgs = { subCategoryTag: string }
+
+export async function getSubCategory(
+	args: GetSubCategoryArgs,
+): Promise<GetSubCategoryResult> {
+	const url =
+		baseStrapiApiUrl + `/api/sub-categories/${args.subCategoryTag}?populate=*`
+
+	try {
+		const response = await fetch(url)
+		const { data } = await response.json()
+
+		return {
+			ok: true,
+			data: {
+				subCategory: {
+					id: data.id,
+					tag: data.attributes.tag,
+					title: data.attributes.title,
+					description: data.attributes.description,
+					link: `/${data.attributes.tag}`,
+					createdAt: new Date(data.attributes.createdAt),
+					updatedAt: new Date(data.attributes.updatedAt),
+					publishedAt: new Date(data.attributes.publishedAt),
+				},
+			},
+		}
+	} catch (e) {
+		return {
+			ok: false,
+			error: {
+				name: "Error",
+				message: "An error happened while fetching sub category",
 			},
 		}
 	}

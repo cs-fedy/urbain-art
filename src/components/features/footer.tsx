@@ -9,12 +9,25 @@ import FacebookIcon from "../icons/facebook"
 import InstagramIcon from "../icons/instagram"
 import LinkedinIcon from "../icons/linkedin"
 import PhoneIcon from "../icons/phone"
+import { SubCategory } from "./categories/types"
 
 export default async function Footer() {
-	const categories = await listCategories({
-		limit: 5,
-		fields: ["title"],
-	})
+	const categories = await listCategories()
+
+	const SubCategories = !categories.ok
+		? []
+		: categories.data.categories
+				.reduce(
+					(prev, curr) => [...prev, ...curr.items],
+					[] as Array<SubCategory>,
+				)
+				.sort((a, b) => {
+					const randomValue = Math.random()
+					if (randomValue > 0.5) return 1
+					else if (randomValue < 0.5) return -1
+					return 0
+				})
+				.slice(0, 5)
 
 	return (
 		<footer className='w-full bg-urbain-black'>
@@ -117,20 +130,18 @@ export default async function Footer() {
 								nos produits
 							</h3>
 
-							{categories.ok && (
-								<div
-									role='list'
-									className='flex w-full flex-col items-start justify-between space-y-3'>
-									{categories.data.categories.map(category => (
-										<Link
-											key={category.id}
-											href={category.link}
-											className='text-sm font-medium capitalize leading-snug tracking-wider text-urbain-white duration-200 ease-in-out hover:underline md:text-base lg:text-lg'>
-											{category.title}
-										</Link>
-									))}
-								</div>
-							)}
+							<div
+								role='list'
+								className='flex w-full flex-col items-start justify-between space-y-3'>
+								{SubCategories.map(category => (
+									<Link
+										key={category.id}
+										href={category.link}
+										className='text-sm font-medium capitalize leading-snug tracking-wider text-urbain-white duration-200 ease-in-out hover:underline md:text-base lg:text-lg'>
+										{category.title}
+									</Link>
+								))}
+							</div>
 						</div>
 
 						<div className='flex flex-col items-start space-y-10'>

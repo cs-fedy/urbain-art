@@ -6,6 +6,7 @@ import { Product } from "./types"
 
 type ProductItemProps = { product: Product }
 
+// TODO: fix the style
 export default function ProductItem({ product }: ProductItemProps) {
 	return (
 		<div className='flex h-full w-full flex-col items-start overflow-hidden rounded-lg bg-white shadow-sm'>
