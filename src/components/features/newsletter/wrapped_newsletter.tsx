@@ -6,6 +6,7 @@ import Input from "@/components/common/input"
 import { JoinNewsletterResult } from "@/lib/api"
 import Image from "next/image"
 import { useFormState, useFormStatus } from "react-dom"
+import { toast } from "react-toastify"
 
 type NewsletterFormWrapperProps = {
 	formAction: (state: any, formData: FormData) => Promise<JoinNewsletterResult>
@@ -18,6 +19,13 @@ export default function WrappedNewsletter({
 }: NewsletterFormWrapperProps) {
 	const { pending } = useFormStatus()
 	const [state, action] = useFormState(formAction, initialValue)
+
+	if (state.ok) {
+		toast.success("joined newsletter successfully", {
+			position: "top-right",
+			style: { backgroundColor: "#000000" },
+		})
+	}
 
 	return (
 		<div className='relative flex w-full flex-col-reverse items-center gap-y-16 bg-urbain-black lg:flex-row'>
@@ -47,8 +55,8 @@ export default function WrappedNewsletter({
 					<Input
 						type='email'
 						name='email'
-						placeholder='Enter your email'
-						className='w-full rounded-lg text-white lg:w-max'
+						placeholder='Entrez votre email'
+						className='w-full rounded-lg text-xl text-white lg:w-max'
 						error={!state.ok && state.error?.message}
 					/>
 					<Box

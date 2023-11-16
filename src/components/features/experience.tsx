@@ -32,7 +32,7 @@ export default function Experience() {
 						<h3 className='text-center font-play-fair text-2xl font-bold text-urbain-white md:text-3xl lg:text-4xl'>
 							Fidélité
 						</h3>
-						<span className='max-w-[11rem] text-center text-sm text-gray-500 md:text-base'>
+						<span className='max-w-[13rem] text-center text-sm text-gray-500 md:text-lg'>
 							Nous sommes fidèles à nos clients
 						</span>
 					</div>
@@ -44,7 +44,7 @@ export default function Experience() {
 						<h3 className='text-center font-play-fair text-2xl font-bold text-urbain-white md:text-3xl lg:text-4xl'>
 							Porteurs d&apos;idées
 						</h3>
-						<span className='max-w-[11rem] text-center text-sm text-gray-500 md:text-base'>
+						<span className='max-w-[13rem] text-center text-sm text-gray-500 md:text-lg'>
 							Nous sommes des porteurs d&apos;idées
 						</span>
 					</div>
@@ -58,10 +58,10 @@ export default function Experience() {
 								height={126}
 							/>
 						</div>
-						<h3 className='max-w-[15rem] text-center font-play-fair text-2xl font-bold text-urbain-white md:text-3xl lg:text-4xl'>
+						<h3 className='text-center font-play-fair text-2xl font-bold text-urbain-white md:text-3xl lg:text-4xl'>
 							Passion pour le travail
 						</h3>
-						<span className='max-w-[11rem] text-center text-sm text-gray-500 md:text-base'>
+						<span className='max-w-[13rem] text-center text-sm text-gray-500 md:text-lg'>
 							Nous sommes passionnés par le travail
 						</span>
 					</div>

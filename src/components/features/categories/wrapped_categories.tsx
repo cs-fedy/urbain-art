@@ -24,7 +24,7 @@ export default function WrappedCategories({
 	return (
 		<div
 			ref={containerRef}
-			className='fixed right-0 top-0 z-20 hidden h-screen bg-urbain-black lg:block'>
+			className='fixed right-0 top-0 z-50 hidden h-screen bg-urbain-black lg:block'>
 			<div className='flex h-full px-5 pb-16 pt-32'>
 				{selectedCategory && (
 					<div className='h-full w-96'>

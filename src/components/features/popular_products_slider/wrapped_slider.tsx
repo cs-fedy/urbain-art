@@ -6,7 +6,7 @@ import SliderDot from "./slider_dot"
 import { Slides } from "./types"
 
 const MAX_SLIDES = 8
-const SLIDING_INTERVAL = 1300
+const SLIDING_INTERVAL = 2000
 
 type WrappedSliderProps = {
 	slides: Slides

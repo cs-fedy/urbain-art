@@ -1,5 +1,12 @@
 {
-	"cSpell.words": ["clsx", "Parens", "Strapi", "tailwindcss", "urbain"],
+	"cSpell.words": [
+		"clsx",
+		"Parens",
+		"Strapi",
+		"tailwindcss",
+		"toastify",
+		"urbain"
+	],
 
 	"files.eol": "\n",
 	"editor.formatOnSave": true,

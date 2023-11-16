@@ -5,13 +5,12 @@ import Box from "@/components/common/box"
 import Icon from "@/components/common/icon"
 import ChevronDownIcon from "@/components/icons/chevron_down"
 import MenuIcon from "@/components/icons/menu"
-import ShoppingCartIcon from "@/components/icons/shopping_cart"
 import XMarkIcon from "@/components/icons/x_mark"
 import cn from "@/utils/cn"
 import Image from "next/image"
-import Link from "next/link"
 import { useState } from "react"
 import { Categories } from "../categories/types"
+import TopBar from "../top_bar"
 import CategoriesMobileDropdown from "./categories_mobile_dropdown"
 import Dropdown from "./dropdown"
 import NavbarItem from "./navbar_item"
@@ -23,6 +22,10 @@ export default function WrappedNavbar({ categories }: WrappedNavbarProps) {
 
 	return (
 		<div className='fixed inset-x-0 top-0 z-40 bg-urbain-black lg:bg-urbain-black/90'>
+			<div className=' hidden lg:block'>
+				<TopBar />
+			</div>
+
 			<div className='relative mx-auto flex w-11/12 items-center justify-between py-3 lg:w-10/12'>
 				<Image src={logo} alt='urbain art logo' width={43} height={53} />
 
@@ -31,7 +34,7 @@ export default function WrappedNavbar({ categories }: WrappedNavbarProps) {
 					<NavbarItem>
 						<div className='group relative'>
 							<div className='flex items-center space-x-1'>
-								<span className='text-sm'>no produits</span>
+								<span className='text-sm'>nos produits</span>
 								<Icon
 									icon={<ChevronDownIcon />}
 									className='h-4 w-4 text-urbain-white'
@@ -44,6 +47,7 @@ export default function WrappedNavbar({ categories }: WrappedNavbarProps) {
 						</div>
 					</NavbarItem>
 					<NavbarItem href='/about'>a propos</NavbarItem>
+					<NavbarItem href='/services'>nos services</NavbarItem>
 					<NavbarItem href='/catalog'>catalogue</NavbarItem>
 					<NavbarItem href='/contact'>contact</NavbarItem>
 				</nav>
@@ -66,18 +70,15 @@ export default function WrappedNavbar({ categories }: WrappedNavbarProps) {
 						<NavbarItem href='/'>Acceuil</NavbarItem>
 						<CategoriesMobileDropdown categories={categories} />
 						<NavbarItem href='/about'>a propos</NavbarItem>
+						<NavbarItem href='/services'>nos services</NavbarItem>
 						<NavbarItem href='/catalog'>catalogue</NavbarItem>
 						<NavbarItem href='/contact'>contact</NavbarItem>
 					</nav>
+
+					<TopBar />
 				</div>
 
 				<div className='flex items-center space-x-4 lg:space-x-8'>
-					<Link href='/cart'>
-						<Icon
-							icon={<ShoppingCartIcon />}
-							className='h-[26px] w-[27px] text-urbain-white lg:h-[34px] lg:w-[35px]'
-						/>
-					</Link>
 					<Box component='button' variant='primary'>
 						Demendez un devis
 					</Box>

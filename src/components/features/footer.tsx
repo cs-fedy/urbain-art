@@ -5,9 +5,6 @@ import Image from "next/image"
 import Link from "next/link"
 import Icon from "../common/icon"
 import EnvelopeIcon from "../icons/envelope"
-import FacebookIcon from "../icons/facebook"
-import InstagramIcon from "../icons/instagram"
-import LinkedinIcon from "../icons/linkedin"
 import PhoneIcon from "../icons/phone"
 import { SubCategory } from "./categories/types"
 
@@ -33,35 +30,12 @@ export default async function Footer() {
 		<footer className='w-full bg-urbain-black'>
 			<div className='mx-auto flex w-11/12 flex-col items-center justify-between gap-y-20 py-20 md:py-10 lg:flex-row'>
 				<div className='flex w-full flex-col items-start space-y-8 lg:w-max'>
-					<div className='flex w-full flex-col items-start space-y-5'>
-						<Image
-							src={horizontalLogo}
-							alt='horizontal urbain art logo'
-							width={530}
-							height={137}
-						/>
-
-						<div className='ml-5 flex items-center space-x-2'>
-							<Link href='/'>
-								<Icon
-									icon={<FacebookIcon />}
-									className='h-[28px] w-[27px] text-urbain-white'
-								/>
-							</Link>
-							<Link href='/'>
-								<Icon
-									icon={<InstagramIcon />}
-									className='h-[27px] w-[27px] text-urbain-white'
-								/>
-							</Link>
-							<Link href='/'>
-								<Icon
-									icon={<LinkedinIcon />}
-									className='h-[27px] w-[28px] text-urbain-white'
-								/>
-							</Link>
-						</div>
-					</div>
+					<Image
+						src={horizontalLogo}
+						alt='horizontal urbain art logo'
+						width={530}
+						height={137}
+					/>
 
 					<div className='flex w-full flex-col items-start space-y-6'>
 						<span className='max-w-xs text-sm leading-snug tracking-wider text-urbain-white md:text-base lg:text-lg'>

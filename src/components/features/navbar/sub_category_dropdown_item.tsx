@@ -25,18 +25,13 @@ export default function SubCategoryDropdownItem({
 			</DropdownMobileItem>
 
 			{isOpen && (
-				<div
-					className={cn(
-						isOpen
-							? "block border-b-2 border-b-urbain-white pt-2"
-							: "hidden pt-0",
-					)}>
+				<div className={cn(isOpen ? "block pt-2" : "hidden pt-0")}>
 					<div className='flex w-max flex-col items-start gap-y-6 bg-urbain-black py-3'>
 						{category.items.map(item => (
 							<Link
 								key={item.id}
 								href={item.link}
-								className='font-montserrat tracking-wide text-urbain-white hover:underline'>
+								className='ml-10 font-montserrat tracking-wide text-urbain-white hover:underline'>
 								{item.title}
 							</Link>
 						))}
