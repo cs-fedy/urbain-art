@@ -1,25 +1,18 @@
-"use client"
-
-import logo from "@/../public/svg/logo.svg"
+import logo from "@/../public/svg/horizontal_logo.svg"
 import Box from "@/components/common/box"
 import Icon from "@/components/common/icon"
 import ChevronDownIcon from "@/components/icons/chevron_down"
-import MenuIcon from "@/components/icons/menu"
-import XMarkIcon from "@/components/icons/x_mark"
-import cn from "@/utils/cn"
 import Image from "next/image"
-import { useState } from "react"
 import { Categories } from "../categories/types"
 import TopBar from "../top_bar"
 import CategoriesMobileDropdown from "./categories_mobile_dropdown"
 import Dropdown from "./dropdown"
+import MobileMenu from "./mobile_menu"
 import NavbarItem from "./navbar_item"
 
 type WrappedNavbarProps = { categories: Categories }
 
 export default function WrappedNavbar({ categories }: WrappedNavbarProps) {
-	const [isOpen, setOpen] = useState(false)
-
 	return (
 		<div className='fixed inset-x-0 top-0 z-40 bg-urbain-black lg:bg-urbain-black/90'>
 			<div className=' hidden lg:block'>
@@ -27,7 +20,7 @@ export default function WrappedNavbar({ categories }: WrappedNavbarProps) {
 			</div>
 
 			<div className='relative mx-auto flex w-11/12 items-center justify-between py-3 lg:w-10/12'>
-				<Image src={logo} alt='urbain art logo' width={43} height={53} />
+				<Image src={logo} alt='urbain art logo' width={240} height={61} />
 
 				<nav className='hidden items-center space-x-8 lg:flex'>
 					<NavbarItem href='/'>Acceuil</NavbarItem>
@@ -52,20 +45,7 @@ export default function WrappedNavbar({ categories }: WrappedNavbarProps) {
 					<NavbarItem href='/contact'>contact</NavbarItem>
 				</nav>
 
-				<div
-					className={cn(
-						isOpen ? "fixed" : "hidden",
-						"inset-0 overflow-auto bg-urbain-black py-7 lg:hidden",
-					)}>
-					<div className='mx-auto flex w-11/12 justify-end'>
-						<button type='button' onClick={() => setOpen(false)}>
-							<Icon
-								icon={<XMarkIcon />}
-								className='h-6 w-6 text-urbain-white'
-							/>
-						</button>
-					</div>
-
+				<MobileMenu>
 					<nav className='mx-auto my-16 flex w-10/12 flex-col space-y-10'>
 						<NavbarItem href='/'>Acceuil</NavbarItem>
 						<CategoriesMobileDropdown categories={categories} />
@@ -75,20 +55,19 @@ export default function WrappedNavbar({ categories }: WrappedNavbarProps) {
 						<NavbarItem href='/contact'>contact</NavbarItem>
 					</nav>
 
-					<TopBar />
-				</div>
+					<div className='mx-auto w-11/12'>
+						<Box component='button' className='w-full' variant='primary'>
+							<span className='w-full text-center'>Demendez un devis</span>
+						</Box>
+					</div>
 
-				<div className='flex items-center space-x-4 lg:space-x-8'>
+					<TopBar />
+				</MobileMenu>
+
+				<div className='hidden items-center space-x-4 lg:flex lg:space-x-8'>
 					<Box component='button' variant='primary'>
 						Demendez un devis
 					</Box>
-
-					<button
-						type='button'
-						className='lg:hidden'
-						onClick={() => setOpen(true)}>
-						<Icon icon={<MenuIcon />} className='h-6 w-6 text-urbain-white' />
-					</button>
 				</div>
 			</div>
 		</div>

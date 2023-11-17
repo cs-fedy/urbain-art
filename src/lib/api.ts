@@ -130,6 +130,7 @@ export async function listCategories(
 type ListProductsArgs = {
 	limit?: number
 	filter?: { subCategory?: string }
+	query?: string
 }
 
 type ListProductsResult =
@@ -140,9 +141,13 @@ export async function listProducts(
 	args?: ListProductsArgs,
 ): Promise<ListProductsResult> {
 	let url = baseStrapiApiUrl + "/api/products?populate=*"
+
 	if (args?.limit) url += `&pagination[pageSize]=${args.limit}`
+
 	if (args?.filter?.subCategory)
 		url += `&filters[sub_category][tag]=${args.filter.subCategory}`
+
+	if (args?.query) url += `&filters[title][$containsi]=${args.query}`
 
 	try {
 		const response = await fetch(url)

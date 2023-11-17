@@ -9,7 +9,7 @@ import SearchBox from "./search_box/search_box"
 export default function TopBar() {
 	return (
 		<div className='mx-auto flex w-11/12 flex-col items-center justify-between gap-y-5 py-3 lg:w-10/12 lg:flex-row'>
-			<div className='w-full lg:w-2/5'>
+			<div className='w-full text-urbain-white lg:w-2/5'>
 				<SearchBox />
 			</div>
 

@@ -1,4 +1,4 @@
-import CategoryProducts from "@/components/features/category_products/category_products"
+import CategoryProducts from "@/components/features/category_products"
 import { getSubCategory } from "@/lib/api"
 
 type CategoryPageProps = {

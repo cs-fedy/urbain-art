@@ -12,7 +12,7 @@ type NewsletterFormWrapperProps = {
 	formAction: (state: any, formData: FormData) => Promise<JoinNewsletterResult>
 }
 
-const initialValue = { email: "" }
+const initialValue = { email: null }
 
 export default function WrappedNewsletter({
 	formAction,
