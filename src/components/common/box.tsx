@@ -9,7 +9,7 @@ type AsProps<T extends ElementType> = {
 type BoxProps<T extends ElementType> = PropsWithChildren<AsProps<T>> &
 	Omit<ComponentProps<T>, keyof AsProps<T>>
 
-export default function Button<T extends ElementType = "span">({
+export default function Box<T extends ElementType = "span">({
 	children,
 	className,
 	variant,

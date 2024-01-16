@@ -15,8 +15,6 @@ export default async function SearchPage({
 		limit,
 	})
 
-	console.log(products)
-
 	// TODO: show 500 page
 	if (!products.ok) return <></>
 
@@ -31,13 +29,15 @@ export default async function SearchPage({
 			<div className='mt-10 flex w-full flex-col items-center gap-y-8'>
 				<Products products={products.data.products} />
 
-				<Box
-					variant='primary'
-					component='a'
-					className='lg:block'
-					href={`/search?query=${query}${limit && "&limit=" + limit}`}>
-					Voir plus
-				</Box>
+				{products.data.products.length > 0 && (
+					<Box
+						variant='primary'
+						component='a'
+						className='lg:block'
+						href={`/search?query=${query}${limit && "&limit=" + (limit ?? 4)}`}>
+						Voir plus
+					</Box>
+				)}
 			</div>
 		</div>
 	)

@@ -1,13 +1,14 @@
-import cn from "@/utils/cn"
 import { ComponentProps } from "react"
+import cn from "@/utils/cn"
 
-type InputProps = ComponentProps<"input"> & { error?: string }
+type TextAreaProps = ComponentProps<"textarea"> & { error?: string }
 
-export default function Input({ className, error, ...rest }: InputProps) {
+export default function TextArea({ className, error, ...rest }: TextAreaProps) {
 	return (
 		<div className='flex w-full flex-col items-start gap-y-1'>
-			<input
+			<textarea
 				{...rest}
+				rows={5}
 				className={cn(
 					"w-full bg-transparent px-4 py-2 outline-none placeholder:text-sm placeholder:text-gray-500 focus:bg-transparent",
 					className,

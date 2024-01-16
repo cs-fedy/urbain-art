@@ -4,15 +4,16 @@ export interface Product {
 	id: number
 	tag: string
 	title: string
-	subCategory: string
+	category: string
 	link: string
-	subTitle: string
+	dimensions: string
 	description: string
 	thumbnail: Image
 	images: Array<Image>
 	createdAt: Date
 	updatedAt: Date
 	publishedAt: Date
+	catalog?: string
 }
 
 export type Products = Array<Product>

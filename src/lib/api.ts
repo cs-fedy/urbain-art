@@ -1,7 +1,7 @@
-import { Categories, SubCategory } from "@/components/features/categories/types"
+import { Categories, Category } from "@/components/features/categories/types"
 import { Newsletter } from "@/components/features/newsletter/types"
 import { Slides } from "@/components/features/popular_products_slider/types"
-import { Products } from "@/components/features/product/types"
+import { Product, Products } from "@/components/features/product/types"
 import { Members } from "@/components/features/team/types"
 
 const baseStrapiApiUrl =
@@ -59,18 +59,21 @@ type ListCategoriesArgs = {
 export async function listCategories(
 	args?: ListCategoriesArgs,
 ): Promise<ListCategoriesResult> {
-	let url = baseStrapiApiUrl + "/api/categories?"
-	if (!args?.fields) url += "populate=*&"
+	const query: Record<string, string> = {}
+	if (args?.limit !== undefined)
+		query["pagination[pageSize]"] = args.limit.toString()
+	if (!args?.fields) query["populate"] = "*"
 	else {
-		url += args.fields
-			.map((field, index) => `fields[${index}]=${field}`)
-			.join("&")
+		args.fields.forEach((value, index) => {
+			query[`fields[${index}]`] = value.toString()
+		})
 
 		if (!args.fields.includes("tag"))
-			url += `&fields[${args.fields.length}]=tag`
+			query[`fields[${args.fields.length}]`] = "tag"
 	}
 
-	if (args?.limit) url += `&pagination[pageSize]=${args.limit}`
+	const queryString = new URLSearchParams(query)
+	const url = baseStrapiApiUrl + "/api/categories?" + queryString.toString()
 
 	try {
 		const response = await fetch(url)
@@ -84,6 +87,7 @@ export async function listCategories(
 						id: curr.id,
 						tag: curr.attributes.tag,
 						title: curr.attributes.title,
+						description: curr.attributes.description,
 						createdAt:
 							curr.attributes.createdAt && new Date(curr.attributes.createdAt),
 						updatedAt:
@@ -91,27 +95,8 @@ export async function listCategories(
 						publishedAt:
 							curr.attributes.createdAt &&
 							new Date(curr.attributes.publishedAt),
-						image:
-							curr.attributes.image?.data[0] &&
-							`${baseStrapiApiUrl}${curr.attributes.image.data[0].attributes.url}`,
-						items:
-							curr.attributes.sub_categories &&
-							curr.attributes.sub_categories.data.map(
-								(rawSubCategory: any): SubCategory => {
-									return {
-										id: rawSubCategory.id,
-										tag: rawSubCategory.attributes.tag,
-										title: rawSubCategory.attributes.title,
-										description: rawSubCategory.description,
-										link: `/${rawSubCategory.attributes.tag}`,
-										createdAt: new Date(rawSubCategory.attributes.createdAt),
-										updatedAt: new Date(rawSubCategory.attributes.updatedAt),
-										publishedAt: new Date(
-											rawSubCategory.attributes.publishedAt,
-										),
-									}
-								},
-							),
+
+						link: `/${curr.attributes.tag}`,
 					}
 				}),
 			},
@@ -129,7 +114,7 @@ export async function listCategories(
 
 type ListProductsArgs = {
 	limit?: number
-	filter?: { subCategory?: string }
+	filter?: { category?: string }
 	query?: string
 }
 
@@ -144,8 +129,8 @@ export async function listProducts(
 
 	if (args?.limit) url += `&pagination[pageSize]=${args.limit}`
 
-	if (args?.filter?.subCategory)
-		url += `&filters[sub_category][tag]=${args.filter.subCategory}`
+	if (args?.filter?.category)
+		url += `&filters[category][tag]=${args.filter.category}`
 
 	if (args?.query) url += `&filters[title][$containsi]=${args.query}`
 
@@ -176,9 +161,12 @@ export async function listProducts(
 							(image: any): string =>
 								`${baseStrapiApiUrl}${image.attributes.url}`,
 						),
-						subTitle: curr.attributes.sub_title,
+						dimensions: curr.attributes.dimensions,
 						description: curr.attributes.description,
-						subCategory: curr.attributes.sub_category.data.attributes.tag,
+						category: curr.attributes.category.data.attributes.tag,
+						catalog: curr.attributes.catalog?.data
+							? `${baseStrapiApiUrl}${curr.attributes.catalog.data.attributes.url}`
+							: undefined,
 					}
 				}),
 			},
@@ -287,17 +275,17 @@ export async function listMembers(
 	}
 }
 
-type GetSubCategoryResult =
-	| { ok: true; data: { subCategory: SubCategory } }
+type GetCategoryResult =
+	| { ok: true; data: { category: Category } }
 	| { ok: false; error: { name: string; message: string } }
 
-type GetSubCategoryArgs = { subCategoryTag: string }
+type GetCategoryArgs = { categoryTag: string }
 
-export async function getSubCategory(
-	args: GetSubCategoryArgs,
-): Promise<GetSubCategoryResult> {
+export async function getCategory(
+	args: GetCategoryArgs,
+): Promise<GetCategoryResult> {
 	const url =
-		baseStrapiApiUrl + `/api/sub-categories/${args.subCategoryTag}?populate=*`
+		baseStrapiApiUrl + `/api/categories/${args.categoryTag}?populate=*`
 
 	try {
 		const response = await fetch(url)
@@ -306,15 +294,18 @@ export async function getSubCategory(
 		return {
 			ok: true,
 			data: {
-				subCategory: {
+				category: {
 					id: data.id,
 					tag: data.attributes.tag,
 					title: data.attributes.title,
 					description: data.attributes.description,
+					createdAt:
+						data.attributes.createdAt && new Date(data.attributes.createdAt),
+					updatedAt:
+						data.attributes.createdAt && new Date(data.attributes.updatedAt),
+					publishedAt:
+						data.attributes.createdAt && new Date(data.attributes.publishedAt),
 					link: `/${data.attributes.tag}`,
-					createdAt: new Date(data.attributes.createdAt),
-					updatedAt: new Date(data.attributes.updatedAt),
-					publishedAt: new Date(data.attributes.publishedAt),
 				},
 			},
 		}
@@ -323,7 +314,104 @@ export async function getSubCategory(
 			ok: false,
 			error: {
 				name: "Error",
-				message: "An error happened while fetching sub category",
+				message: "An error happened while fetching category",
+			},
+		}
+	}
+}
+
+export type SubmitContactFormResult =
+	| { ok: true }
+	| { ok: false; error: { name: string; message: string } }
+
+export type SubmitContactFormArgs = {
+	fullName: string
+	email: string
+	phoneNumber: number
+	topic: string
+	message: string
+}
+
+export async function submitContactForm(
+	args: SubmitContactFormArgs,
+): Promise<SubmitContactFormResult> {
+	try {
+		const url = baseStrapiApiUrl + "/api/contacts"
+		const response = await fetch(url, {
+			body: JSON.stringify({
+				data: {
+					...args,
+					full_name: args.fullName,
+					phone_number: args.phoneNumber,
+				},
+			}),
+			headers: { "Content-Type": "application/json" },
+			method: "POST",
+		})
+
+		await response.json()
+		return { ok: true }
+	} catch (e) {
+		const error = e as any
+
+		return {
+			ok: false,
+			error: { name: error.error.name, message: error.error.message },
+		}
+	}
+}
+
+type GetProductArgs = { productTag: string }
+
+type GetProductResult =
+	| { ok: true; data: { product: Product } }
+	| { ok: false; error: { name: string; message: string } }
+
+export async function getProduct(
+	args: GetProductArgs,
+): Promise<GetProductResult> {
+	let url = baseStrapiApiUrl + `/api/products/${args.productTag}`
+
+	try {
+		const response = await fetch(url)
+		const { data } = await response.json()
+
+		return {
+			ok: true,
+			data: {
+				product: {
+					id: data.id,
+					tag: data.attributes.tag,
+					title: data.attributes.title,
+					createdAt:
+						data.attributes.createdAt && new Date(data.attributes.createdAt),
+					updatedAt:
+						data.attributes.createdAt && new Date(data.attributes.updatedAt),
+					publishedAt:
+						data.attributes.createdAt && new Date(data.attributes.publishedAt),
+					link: `/products/${data.attributes.tag}`,
+					thumbnail:
+						data.attributes.thumbnail &&
+						`${baseStrapiApiUrl}${data.attributes.thumbnail.data.attributes.url}`,
+					images: data.attributes.images.data.map(
+						(image: any): string =>
+							`${baseStrapiApiUrl}${image.attributes.url}`,
+					),
+					dimensions: data.attributes.dimensions,
+					description: data.attributes.description,
+					category: data.attributes.category.data.attributes.tag,
+					catalog: data.attributes.catalog?.data
+						? `${baseStrapiApiUrl}${data.attributes.catalog.data.attributes.url}`
+						: undefined,
+				},
+			},
+		}
+	} catch (e) {
+		return {
+			ok: false,
+			error: {
+				name: "Error",
+				message: "An error happened while fetching products",
 			},
 		}
 	}

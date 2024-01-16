@@ -41,7 +41,6 @@ export default function WrappedNavbar({ categories }: WrappedNavbarProps) {
 					</NavbarItem>
 					<NavbarItem href='/about'>a propos</NavbarItem>
 					<NavbarItem href='/services'>nos services</NavbarItem>
-					<NavbarItem href='/catalog'>catalogue</NavbarItem>
 					<NavbarItem href='/contact'>contact</NavbarItem>
 				</nav>
 
@@ -51,7 +50,6 @@ export default function WrappedNavbar({ categories }: WrappedNavbarProps) {
 						<CategoriesMobileDropdown categories={categories} />
 						<NavbarItem href='/about'>a propos</NavbarItem>
 						<NavbarItem href='/services'>nos services</NavbarItem>
-						<NavbarItem href='/catalog'>catalogue</NavbarItem>
 						<NavbarItem href='/contact'>contact</NavbarItem>
 					</nav>
 

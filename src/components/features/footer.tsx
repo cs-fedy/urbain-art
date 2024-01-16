@@ -6,7 +6,6 @@ import Link from "next/link"
 import Icon from "../common/icon"
 import EnvelopeIcon from "../icons/envelope"
 import PhoneIcon from "../icons/phone"
-import { SubCategory } from "./categories/types"
 
 export default async function Footer() {
 	const categories = await listCategories()
@@ -14,10 +13,6 @@ export default async function Footer() {
 	const SubCategories = !categories.ok
 		? []
 		: categories.data.categories
-				.reduce(
-					(prev, curr) => [...prev, ...curr.items],
-					[] as Array<SubCategory>,
-				)
 				.sort((a, b) => {
 					const randomValue = Math.random()
 					if (randomValue > 0.5) return 1

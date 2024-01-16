@@ -4,7 +4,7 @@ import cn from "@/utils/cn"
 import { useState } from "react"
 import { Categories } from "../categories/types"
 import DropdownMobileItem from "./dropdown_mobile_item"
-import SubCategoryDropdownItem from "./sub_category_dropdown_item"
+import Link from "next/link"
 
 type CategoriesMobileDropdownProps = { categories: Categories }
 
@@ -27,7 +27,12 @@ export default function CategoriesMobileDropdown({
 			<div className={cn(isOpen ? "block pt-4" : "hidden pt-0")}>
 				<div className='flex w-full flex-col items-start gap-y-6 py-3'>
 					{categories.map(category => (
-						<SubCategoryDropdownItem category={category} key={category.id} />
+						<Link
+							key={category.id}
+							href={category.link}
+							className='ml-10 font-montserrat tracking-wide text-urbain-white hover:underline'>
+							{category.title}
+						</Link>
 					))}
 				</div>
 			</div>
