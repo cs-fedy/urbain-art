@@ -6,11 +6,7 @@ import ShoppingCartIcon from "@/components/icons/shopping_cart"
 import ChevronLeftIcon from "@/components/icons/chevron-left"
 import ChevronRightIcon from "@/components/icons/chevron_right"
 import React, { useEffect, useState } from "react"
-
-type ParsedCart = Array<{
-	tag: string
-	count: number
-}>
+import handleSyncCart from "@/lib/sync-cart"
 
 type ShoppingCountProps = { tag: string }
 
@@ -43,39 +39,10 @@ export default function ShoppingCount({ tag }: ShoppingCountProps) {
 		}
 	}, [tag])
 
-	const handleSyncCart = (count: number) => {
-		const cart = localStorage.getItem("cart")
-
-		if (!cart) {
-			return localStorage.setItem("cart", JSON.stringify([{ tag, count }]))
-		}
-
-		try {
-			const parsedCart = JSON.parse(cart) as ParsedCart
-
-			const foundProduct = parsedCart.find(item => item.tag === tag)
-
-			if (!foundProduct)
-				return localStorage.setItem(
-					"cart",
-					JSON.stringify([...parsedCart, { tag, count }]),
-				)
-
-			return localStorage.setItem(
-				"cart",
-				JSON.stringify(
-					parsedCart.map(item => (item.tag === tag ? { tag, count } : item)),
-				),
-			)
-		} catch (e) {
-			localStorage.removeItem("cart")
-		}
-	}
-
 	const handleCountChange = (direction: 1 | -1) => {
 		setCount(prev => {
 			const updatedCount = Math.max(prev + direction)
-			handleSyncCart(updatedCount)
+			handleSyncCart(tag, updatedCount)
 			return updatedCount
 		})
 	}

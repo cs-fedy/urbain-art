@@ -1,14 +1,53 @@
+"use client"
+
 import Box from "@/components/common/box"
 import Icon from "@/components/common/icon"
 import ShoppingCartIcon from "@/components/icons/shopping_cart"
 import Image from "next/image"
 import { Product } from "./types"
 import Link from "next/link"
+import { useEffect, useState } from "react"
+import handleSyncCart from "@/lib/sync-cart"
 
 type ProductItemProps = { product: Product }
 
-// TODO: fix the style
 export default function ProductItem({ product }: ProductItemProps) {
+	const [count, setCount] = useState(0)
+
+	useEffect(() => {
+		const cart = localStorage.getItem("cart")
+
+		if (cart) {
+			try {
+				const parsedCart = JSON.parse(cart)
+				const products = parsedCart.reduce(
+					(
+						prev: Record<string, number>,
+						curr: { tag: string; count: string },
+					) => {
+						if (!Object.keys(prev).includes(curr.tag))
+							return { ...prev, [curr.tag]: Number.parseInt(curr.count) }
+						return prev
+					},
+					{},
+				)
+
+				const count = products[product.tag]
+				if (count) setCount(count)
+			} catch (e) {
+				localStorage.removeItem("cart")
+			}
+		}
+	}, [product.tag])
+
+	const handleCountChange = (direction: 1 | -1) => {
+		setCount(prev => {
+			const updatedCount = Math.max(prev + direction)
+			handleSyncCart(product.tag, updatedCount)
+			return updatedCount
+		})
+	}
+
 	return (
 		<div className='flex w-full flex-col items-start overflow-hidden rounded-lg bg-white shadow-sm'>
 			<div className='aspect-video overflow-hidden'>
@@ -32,7 +71,10 @@ export default function ProductItem({ product }: ProductItemProps) {
 					</span>
 				</div>
 				<div className='flex w-full justify-end'>
-					<Box component='button' variant='secondary'>
+					<Box
+						onClick={() => handleCountChange(1)}
+						component='button'
+						variant='secondary'>
 						<span>Ajouter</span>
 						<Icon
 							icon={<ShoppingCartIcon />}
