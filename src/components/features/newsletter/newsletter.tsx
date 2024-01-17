@@ -1,5 +1,7 @@
-import { JoinNewsletterResult, joinNewsletter } from "@/lib/api"
+import { joinNewsletter, JoinNewsletterResult } from "@/lib/api"
 import WrappedNewsletter from "./wrapped_newsletter"
+import { z } from "zod"
+import parseZodErrors from "@/lib/parse-zod-errors"
 
 export default function Newsletter() {
 	const formAction = async (
@@ -7,16 +9,31 @@ export default function Newsletter() {
 		formData: FormData,
 	): Promise<JoinNewsletterResult> => {
 		"use server"
-		const email = formData.get("email")
-		if (!email)
+
+		const schema = z.object({
+			email: z.string().email(),
+		})
+
+		const result = schema.safeParse({
+			email: formData.get("email"),
+		})
+
+		if (!result.success) {
+			const parsedError = parseZodErrors(result.error.errors)
+
+			if (!parsedError)
+				return {
+					ok: false,
+					error: { name: result.error.name, message: result.error.message },
+				}
+
 			return {
 				ok: false,
-				error: {
-					name: "ValidationError",
-					message: "Email is required or not valid",
-				},
+				error: parsedError,
 			}
-		return await joinNewsletter(email.toString())
+		}
+
+		return await joinNewsletter(result.data.email)
 	}
 
 	return <WrappedNewsletter formAction={formAction} />

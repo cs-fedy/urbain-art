@@ -320,17 +320,17 @@ export async function getCategory(
 	}
 }
 
-export type SubmitContactFormResult =
-	| { ok: true }
-	| { ok: false; error: { name: string; message: string } }
-
 export type SubmitContactFormArgs = {
 	fullName: string
 	email: string
-	phoneNumber: number
+	phoneNumber: bigint
 	topic: string
 	message: string
 }
+
+export type SubmitContactFormResult =
+	| { ok: true }
+	| { ok: false; error: { name: string; message: string } }
 
 export async function submitContactForm(
 	args: SubmitContactFormArgs,
@@ -413,6 +413,43 @@ export async function getProduct(
 				name: "Error",
 				message: "An error happened while fetching products",
 			},
+		}
+	}
+}
+
+export type SubmitPriceEstimationArgs = {
+	full_name: string
+	email: string
+	topic: string
+	company_name: string
+	tax_number?: string
+	product: string
+	request: string
+}
+
+export type SubmitPriceEstimationResult =
+	| { ok: true }
+	| { ok: false; error: { name: string; message: string } }
+
+export default async function submitPriceEstimation(
+	args: SubmitPriceEstimationArgs,
+): Promise<SubmitPriceEstimationResult> {
+	try {
+		const url = baseStrapiApiUrl + "/api/price-estimations"
+		const response = await fetch(url, {
+			body: JSON.stringify({ data: { ...args } }),
+			headers: { "Content-Type": "application/json" },
+			method: "POST",
+		})
+
+		await response.json()
+		return { ok: true }
+	} catch (e) {
+		const error = e as any
+
+		return {
+			ok: false,
+			error: { name: error.error.name, message: error.error.message },
 		}
 	}
 }

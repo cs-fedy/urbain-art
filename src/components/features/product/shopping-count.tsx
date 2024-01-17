@@ -81,14 +81,14 @@ export default function ShoppingCount({ tag }: ShoppingCountProps) {
 	}
 
 	return (
-		<div className='mt-6 flex items-center gap-x-4'>
+		<div className='mt-6 flex w-full flex-col items-center gap-4 md:w-max md:flex-row'>
 			<Box
 				component='button'
 				type='button'
 				variant='secondary'
-				className='w-max'
+				className='w-full md:w-max'
 				onClick={() => handleCountChange(1)}>
-				<div className='flex gap-x-4'>
+				<div className='flex w-full justify-center gap-x-4 md:w-max'>
 					<span className='text-sm font-bold capitalize text-urbain-white'>
 						ajouter
 					</span>
@@ -101,7 +101,7 @@ export default function ShoppingCount({ tag }: ShoppingCountProps) {
 			</Box>
 
 			{count > 0 && (
-				<div className='flex items-center gap-x-4 rounded-lg border border-gray-50 px-2 py-1'>
+				<div className='flex w-full items-center justify-center gap-x-4 rounded-lg border border-gray-50 px-2 py-1 md:w-max'>
 					<Box
 						className='p-2'
 						type='button'

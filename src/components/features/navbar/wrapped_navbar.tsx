@@ -9,6 +9,7 @@ import CategoriesMobileDropdown from "./categories_mobile_dropdown"
 import Dropdown from "./dropdown"
 import MobileMenu from "./mobile_menu"
 import NavbarItem from "./navbar_item"
+import Link from "next/link"
 
 type WrappedNavbarProps = { categories: Categories }
 
@@ -54,18 +55,22 @@ export default function WrappedNavbar({ categories }: WrappedNavbarProps) {
 					</nav>
 
 					<div className='mx-auto w-11/12'>
-						<Box component='button' className='w-full' variant='primary'>
-							<span className='w-full text-center'>Demendez un devis</span>
-						</Box>
+						<Link href='/devis' className='w-full'>
+							<Box component='span' variant='primary' className='w-full'>
+								Demendez un devis
+							</Box>
+						</Link>
 					</div>
 
 					<TopBar />
 				</MobileMenu>
 
 				<div className='hidden items-center space-x-4 lg:flex lg:space-x-8'>
-					<Box component='button' variant='primary'>
-						Demendez un devis
-					</Box>
+					<Link href='/devis'>
+						<Box component='span' variant='primary'>
+							Demendez un devis
+						</Box>
+					</Link>
 				</div>
 			</div>
 		</div>

@@ -3,7 +3,7 @@
 import Input from "@/components/common/input"
 import TextArea from "@/components/common/text-area"
 import Box from "@/components/common/box"
-import { useFormState } from "react-dom"
+import { useFormState, useFormStatus } from "react-dom"
 import { toast } from "react-toastify"
 import submitContactFormAction from "@/components/features/contact/contact_form/action"
 import { useEffect } from "react"
@@ -17,6 +17,7 @@ const initialValue = {
 }
 
 export default function ContactForm() {
+	const { pending } = useFormStatus()
 	const [state, action] = useFormState(submitContactFormAction, initialValue)
 
 	useEffect(() => {
@@ -40,6 +41,11 @@ export default function ContactForm() {
 						Nom et prénom
 					</label>
 					<Input
+						error={
+							state.ok === false && state.error.name === "fullName"
+								? state.error.message
+								: ""
+						}
 						className='bg-urbain-white focus:bg-urbain-white'
 						id='full-name'
 						placeholder='Nom'
@@ -52,6 +58,11 @@ export default function ContactForm() {
 						Email
 					</label>
 					<Input
+						error={
+							state.ok === false && state.error.name === "email"
+								? state.error.message
+								: ""
+						}
 						className='bg-urbain-white focus:bg-urbain-white'
 						id='email'
 						placeholder='Email'
@@ -64,6 +75,11 @@ export default function ContactForm() {
 						Téléphone
 					</label>
 					<Input
+						error={
+							state.ok === false && state.error.name === "phoneNumber"
+								? state.error.message
+								: ""
+						}
 						className='bg-urbain-white focus:bg-urbain-white'
 						id='phone-number'
 						placeholder='Téléphone'
@@ -76,6 +92,11 @@ export default function ContactForm() {
 						Sujet
 					</label>
 					<Input
+						error={
+							state.ok === false && state.error.name === "topic"
+								? state.error.message
+								: ""
+						}
 						className='bg-urbain-white focus:bg-urbain-white'
 						id='sujet'
 						placeholder='Sujet'
@@ -88,6 +109,11 @@ export default function ContactForm() {
 						Votre message
 					</label>
 					<TextArea
+						error={
+							state.ok === false && state.error.name === "message"
+								? state.error.message
+								: ""
+						}
 						className='bg-urbain-white focus:bg-urbain-white'
 						id='message'
 						placeholder='Votre message'
@@ -96,6 +122,7 @@ export default function ContactForm() {
 				</div>
 
 				<Box
+					disabled={pending}
 					component='button'
 					variant='primary'
 					className='w-full'

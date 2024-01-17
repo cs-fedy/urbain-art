@@ -48,9 +48,11 @@ export default function ProductDetails({ product }: ProductDetailsProps) {
 							download
 							component='a'
 							variant='primary'
-							className='mt-6'
+							className='mt-6 flex w-full justify-center md:w-max'
 							href={product.catalog}>
-							Télécharger le catalogue
+							<span className='text-sm font-bold capitalize text-urbain-white'>
+								Télécharger le catalogue
+							</span>
 						</Box>
 					)}
 				</div>
