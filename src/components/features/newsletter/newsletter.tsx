@@ -11,7 +11,12 @@ export default function Newsletter() {
 		"use server"
 
 		const schema = z.object({
-			email: z.string().email(),
+			email: z
+				.string({
+					required_error: "L'adresse e-mail est obligatoire",
+					invalid_type_error: "Le format de l'email n'est pas valide",
+				})
+				.email(),
 		})
 
 		const result = schema.safeParse({
