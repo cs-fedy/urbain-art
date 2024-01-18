@@ -16,7 +16,11 @@ const initialValue = {
 	message: null,
 }
 
-export default function ContactForm() {
+type ContactFormProps = {
+	submitContactFormAction: (initialState: any, formData: FormData) => void
+}
+
+export default function ContactForm({}: ContactFormProps) {
 	const { pending } = useFormStatus()
 	const [state, action] = useFormState(submitContactFormAction, initialValue)
 
