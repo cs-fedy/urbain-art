@@ -18,7 +18,7 @@ export default function CartItem({ cartItem, handleDelete }: CartItemProps) {
 	if (!data?.ok) return <></>
 
 	return (
-		<div className='grid w-full grid-cols-4 gap-x-5'>
+		<div className='grid w-full grid-cols-1 gap-x-5 md:grid-cols-4'>
 			<div className='flex justify-center border border-urbain-black px-8 py-4'>
 				<Image
 					width={119}

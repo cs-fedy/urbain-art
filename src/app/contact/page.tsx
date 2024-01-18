@@ -1,7 +1,6 @@
 import ContactDetails from "@/components/features/contact/contact-details"
 import Newsletter from "@/components/features/newsletter/newsletter"
-import ContactForm from "@/components/features/contact/contact_form/contact-form"
-import { submitContactForm } from "@/lib/api"
+import Contact from "@/components/features/contact/contact"
 
 export default function ContactPage() {
 	return (
@@ -13,7 +12,7 @@ export default function ContactPage() {
 						<h2 className='w-full text-center font-play-fair text-2xl leading-snug tracking-wider text-urbain-white md:text-3xl lg:max-w-2xl lg:text-4xl'>
 							Contactez-nous
 						</h2>
-						<ContactForm submitContactFormAction={submitContactForm} />
+						<Contact />
 					</div>
 				</div>
 			</div>
