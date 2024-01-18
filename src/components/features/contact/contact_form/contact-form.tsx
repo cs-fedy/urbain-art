@@ -30,106 +30,100 @@ export default function ContactForm() {
 	}, [state])
 
 	return (
-		<div className='flex w-full flex-col items-start gap-14 bg-urbain-black px-12 py-8 lg:w-1/2 lg:px-24 lg:py-16'>
-			<h2 className='w-full text-center font-play-fair text-2xl leading-snug tracking-wider text-urbain-white md:text-3xl lg:max-w-2xl lg:text-4xl'>
-				Contactez-nous
-			</h2>
+		<form action={action} className='flex w-full flex-col items-start gap-12'>
+			<div className='flex w-full flex-col items-start'>
+				<label className='text-sm text-urbain-white' htmlFor='full-name'>
+					Nom et prénom
+				</label>
+				<Input
+					error={
+						state.ok === false && state.error.name === "fullName"
+							? state.error.message
+							: ""
+					}
+					className='bg-urbain-white focus:bg-urbain-white'
+					id='full-name'
+					placeholder='Nom'
+					name='fullName'
+					type='text'
+				/>
+			</div>
+			<div className='flex w-full flex-col items-start'>
+				<label className='text-sm text-urbain-white' htmlFor='email'>
+					Email
+				</label>
+				<Input
+					error={
+						state.ok === false && state.error.name === "email"
+							? state.error.message
+							: ""
+					}
+					className='bg-urbain-white focus:bg-urbain-white'
+					id='email'
+					placeholder='Email'
+					name='email'
+					type='email'
+				/>
+			</div>
+			<div className='flex w-full flex-col items-start'>
+				<label className='text-sm text-urbain-white' htmlFor='phone-number'>
+					Téléphone
+				</label>
+				<Input
+					error={
+						state.ok === false && state.error.name === "phoneNumber"
+							? state.error.message
+							: ""
+					}
+					className='bg-urbain-white focus:bg-urbain-white'
+					id='phone-number'
+					placeholder='Téléphone'
+					name='phoneNumber'
+					type='number'
+				/>
+			</div>
+			<div className='flex w-full flex-col items-start'>
+				<label className='text-sm text-urbain-white' htmlFor='sujet'>
+					Sujet
+				</label>
+				<Input
+					error={
+						state.ok === false && state.error.name === "topic"
+							? state.error.message
+							: ""
+					}
+					className='bg-urbain-white focus:bg-urbain-white'
+					id='sujet'
+					placeholder='Sujet'
+					name='topic'
+					type='text'
+				/>
+			</div>
+			<div className='flex w-full flex-col items-start'>
+				<label className='text-sm text-urbain-white' htmlFor='message'>
+					Votre message
+				</label>
+				<TextArea
+					error={
+						state.ok === false && state.error.name === "message"
+							? state.error.message
+							: ""
+					}
+					className='bg-urbain-white focus:bg-urbain-white'
+					id='message'
+					placeholder='Votre message'
+					name='message'
+				/>
+			</div>
 
-			<form action={action} className='flex w-full flex-col items-start gap-12'>
-				<div className='flex w-full flex-col items-start'>
-					<label className='text-sm text-urbain-white' htmlFor='full-name'>
-						Nom et prénom
-					</label>
-					<Input
-						error={
-							state.ok === false && state.error.name === "fullName"
-								? state.error.message
-								: ""
-						}
-						className='bg-urbain-white focus:bg-urbain-white'
-						id='full-name'
-						placeholder='Nom'
-						name='fullName'
-						type='text'
-					/>
-				</div>
-				<div className='flex w-full flex-col items-start'>
-					<label className='text-sm text-urbain-white' htmlFor='email'>
-						Email
-					</label>
-					<Input
-						error={
-							state.ok === false && state.error.name === "email"
-								? state.error.message
-								: ""
-						}
-						className='bg-urbain-white focus:bg-urbain-white'
-						id='email'
-						placeholder='Email'
-						name='email'
-						type='email'
-					/>
-				</div>
-				<div className='flex w-full flex-col items-start'>
-					<label className='text-sm text-urbain-white' htmlFor='phone-number'>
-						Téléphone
-					</label>
-					<Input
-						error={
-							state.ok === false && state.error.name === "phoneNumber"
-								? state.error.message
-								: ""
-						}
-						className='bg-urbain-white focus:bg-urbain-white'
-						id='phone-number'
-						placeholder='Téléphone'
-						name='phoneNumber'
-						type='number'
-					/>
-				</div>
-				<div className='flex w-full flex-col items-start'>
-					<label className='text-sm text-urbain-white' htmlFor='sujet'>
-						Sujet
-					</label>
-					<Input
-						error={
-							state.ok === false && state.error.name === "topic"
-								? state.error.message
-								: ""
-						}
-						className='bg-urbain-white focus:bg-urbain-white'
-						id='sujet'
-						placeholder='Sujet'
-						name='topic'
-						type='text'
-					/>
-				</div>
-				<div className='flex w-full flex-col items-start'>
-					<label className='text-sm text-urbain-white' htmlFor='message'>
-						Votre message
-					</label>
-					<TextArea
-						error={
-							state.ok === false && state.error.name === "message"
-								? state.error.message
-								: ""
-						}
-						className='bg-urbain-white focus:bg-urbain-white'
-						id='message'
-						placeholder='Votre message'
-						name='message'
-					/>
-				</div>
-
-				<Box
-					disabled={pending}
-					component='button'
-					variant='primary'
-					className='w-full'
-					type='submit'>
-					<span className='w-full text-center'>Envoyer</span>
-				</Box>
-			</form>
-		</div>
+			<Box
+				disabled={pending}
+				component='button'
+				variant='primary'
+				className='w-full'
+				type='submit'>
+				<span className='w-full text-center'>Envoyer</span>
+			</Box>
+		</form>
 	)
 }

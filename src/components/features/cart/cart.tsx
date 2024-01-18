@@ -1,6 +1,6 @@
 "use client"
 
-import { useEffect, useState } from "react"
+import { useCallback, useEffect, useState } from "react"
 import { Cart as TCart } from "@/components/features/cart/types"
 import CartItems from "@/components/features/cart/cart-items"
 
@@ -26,9 +26,20 @@ export default function Cart() {
 		}
 	}, [])
 
+	const handleDelete = useCallback(
+		(tag: string) => {
+			setCart(prev => {
+				const filteredCart = cart.filter(item => item.tag !== tag)
+				localStorage.setItem("cart", JSON.stringify(filteredCart))
+				return filteredCart
+			})
+		},
+		[cart],
+	)
+
 	return (
 		<div className='flex w-full flex-col items-center'>
-			{cart.length > 0 && <CartItems cart={cart} />}
+			{cart.length > 0 && <CartItems handleDelete={handleDelete} cart={cart} />}
 		</div>
 	)
 }
