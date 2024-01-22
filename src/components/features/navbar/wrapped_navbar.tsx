@@ -40,7 +40,7 @@ export default function WrappedNavbar({ categories }: WrappedNavbarProps) {
 							</div>
 						</div>
 					</NavbarItem>
-					<NavbarItem href='/about'>a propos</NavbarItem>
+					<NavbarItem href='/a_propos'>a propos</NavbarItem>
 					<NavbarItem href='/services'>nos services</NavbarItem>
 					<NavbarItem href='/contact'>contact</NavbarItem>
 				</nav>
@@ -49,7 +49,7 @@ export default function WrappedNavbar({ categories }: WrappedNavbarProps) {
 					<nav className='mx-auto my-16 flex w-10/12 flex-col space-y-10'>
 						<NavbarItem href='/'>Acceuil</NavbarItem>
 						<CategoriesMobileDropdown categories={categories} />
-						<NavbarItem href='/about'>a propos</NavbarItem>
+						<NavbarItem href='/a_propos'>a propos</NavbarItem>
 						<NavbarItem href='/services'>nos services</NavbarItem>
 						<NavbarItem href='/contact'>contact</NavbarItem>
 					</nav>

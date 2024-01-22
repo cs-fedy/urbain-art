@@ -7,6 +7,7 @@ import { JoinNewsletterResult } from "@/lib/api"
 import Image from "next/image"
 import { useFormState, useFormStatus } from "react-dom"
 import { toast } from "react-toastify"
+import { useEffect } from "react"
 
 type NewsletterFormWrapperProps = {
 	formAction: (state: any, formData: FormData) => Promise<JoinNewsletterResult>
@@ -20,12 +21,14 @@ export default function WrappedNewsletter({
 	const { pending } = useFormStatus()
 	const [state, action] = useFormState(formAction, initialValue)
 
-	if (state.ok) {
-		toast.success("joined newsletter successfully", {
-			position: "top-right",
-			style: { backgroundColor: "#000000" },
-		})
-	}
+	useEffect(() => {
+		if (state.ok) {
+			toast.success("joined newsletter successfully", {
+				position: "top-right",
+				style: { backgroundColor: "#000000" },
+			})
+		}
+	}, [state])
 
 	return (
 		<div className='relative flex w-full flex-col-reverse items-center gap-y-16 bg-urbain-black lg:flex-row'>

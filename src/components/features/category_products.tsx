@@ -14,13 +14,12 @@ export default async function CategoryProducts({
 	category,
 	limit,
 }: CategoryProductsProps) {
-	const products = await listProducts({
+	const productsResponse = await listProducts({
 		filter: { category: category.tag },
 		limit,
 	})
 
-	// TODO: show 500 page
-	if (!products.ok) return <></>
+	const products = productsResponse.ok ? productsResponse.data.products : []
 
 	return (
 		<div className='relative w-full overflow-hidden  pt-[4.75rem] lg:pt-0'>
@@ -40,9 +39,9 @@ export default async function CategoryProducts({
 				</div>
 
 				<div className='flex w-full flex-col items-center gap-y-8'>
-					<Products products={products.data.products} />
+					<Products products={products} />
 
-					{products.data.products.length > 0 && (
+					{products.length > 0 && (
 						<Box
 							variant='primary'
 							component='a'

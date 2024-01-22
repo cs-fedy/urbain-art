@@ -1,5 +1,6 @@
 import CategoryProducts from "@/components/features/category_products"
 import { getCategory } from "@/lib/api"
+import { notFound } from "next/navigation"
 
 type CategoryPageProps = {
 	params: { category_tag: string }
@@ -11,9 +12,7 @@ export default async function CategoryPage({
 	searchParams: { limit },
 }: CategoryPageProps) {
 	const category = await getCategory({ categoryTag: category_tag })
-
-	// TODO: show 404 page
-	if (!category.ok) return <></>
+	if (!category.ok) return notFound()
 
 	return (
 		<div className='w-full'>

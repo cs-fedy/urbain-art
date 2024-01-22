@@ -47,7 +47,7 @@ export default function ShoppingCount({ tag }: ShoppingCountProps) {
 	}
 
 	return (
-		<div className='flex w-full items-center justify-center gap-x-4  px-2 py-1 md:w-max'>
+		<div className='flex w-full items-center justify-center gap-x-4 px-2 py-1 md:w-max'>
 			<Box
 				className='p-2'
 				type='button'

@@ -27,13 +27,24 @@ export default async function submitContactFormAction(
 			required_error: "Le message est obligatoire",
 			invalid_type_error: "Le message n'est pas valide",
 		}),
-		phoneNumber: z.bigint({
+		phoneNumber: z.string({
 			required_error: "Le numéro de téléphone est obligatoire",
 			invalid_type_error: "Le numéro de téléphone n'est pas valide",
 		}),
 	})
 
-	const result = schema.safeParse(formData)
+	const args = {
+		fullName: formData.get("fullName"),
+		email: formData.get("email"),
+		topic: formData.get("topic"),
+		message: formData.get("message"),
+		phoneNumber: formData.get("phoneNumber"),
+	}
+
+	console.log(args)
+
+	const result = schema.safeParse(args)
+
 	if (!result.success) {
 		const parsedError = parseZodErrors(result.error.errors)
 
@@ -49,5 +60,5 @@ export default async function submitContactFormAction(
 		}
 	}
 
-	return await submitContactForm(result.data)
+	return await submitContactForm(result.data as any)
 }

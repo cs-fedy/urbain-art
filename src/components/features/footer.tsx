@@ -34,9 +34,9 @@ export default async function Footer() {
 
 					<div className='flex w-full flex-col items-start space-y-6'>
 						<span className='max-w-xs text-sm leading-snug tracking-wider text-urbain-white md:text-base lg:text-lg'>
-							Lorem Ipsum is simply dummy text of the printing and typesetting
-							industry. Lorem Ipsum has been the industry&apos;s standard dummy
-							text ever sinc
+							Nous travaillons en étroite collaboration avec nos clients pour
+							comprendre leurs besoins spécifiques et leur offrir des solutions
+							sur mesure.
 						</span>
 
 						<div className='flex w-full items-center space-x-4'>
@@ -82,7 +82,7 @@ export default async function Footer() {
 									nos produits
 								</Link>
 								<Link
-									href='/about'
+									href='/a_props'
 									className='text-sm font-medium capitalize leading-snug tracking-wider text-urbain-white duration-200 ease-in-out hover:underline md:text-base lg:text-lg'>
 									a propos
 								</Link>

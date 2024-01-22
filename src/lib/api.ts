@@ -2,7 +2,6 @@ import { Categories, Category } from "@/components/features/categories/types"
 import { Newsletter } from "@/components/features/newsletter/types"
 import { Slides } from "@/components/features/popular_products_slider/types"
 import { Product, Products } from "@/components/features/product/types"
-import { Members } from "@/components/features/team/types"
 
 const baseStrapiApiUrl =
 	process.env.NODE_ENV === "development"
@@ -225,56 +224,6 @@ export async function listProductsSlides(): Promise<ListProductsSlidesResult> {
 	}
 }
 
-type ListMembersArgs = { limit?: number }
-
-type ListMembersResult =
-	| { ok: true; data: { members: Members } }
-	| { ok: false; error: { name: string; message: string } }
-
-export async function listMembers(
-	args?: ListMembersArgs,
-): Promise<ListMembersResult> {
-	let url = baseStrapiApiUrl + "/api/teams?populate=*"
-	if (args?.limit) url += `&pagination[pageSize]=${args.limit}`
-
-	try {
-		const response = await fetch(url)
-		const { data }: { data: Array<any> } = await response.json()
-
-		return {
-			ok: true,
-			data: {
-				members: data.map(curr => {
-					return {
-						id: curr.id,
-						tag: curr.attributes.tag,
-						fullName: curr.attributes.full_name,
-						position: curr.attributes.position,
-						createdAt:
-							curr.attributes.createdAt && new Date(curr.attributes.createdAt),
-						updatedAt:
-							curr.attributes.createdAt && new Date(curr.attributes.updatedAt),
-						publishedAt:
-							curr.attributes.createdAt &&
-							new Date(curr.attributes.publishedAt),
-						image:
-							curr.attributes.image &&
-							`${baseStrapiApiUrl}${curr.attributes.image.data.attributes.url}`,
-					}
-				}),
-			},
-		}
-	} catch (e) {
-		return {
-			ok: false,
-			error: {
-				name: "Error",
-				message: "An error happened while fetching members",
-			},
-		}
-	}
-}
-
 type GetCategoryResult =
 	| { ok: true; data: { category: Category } }
 	| { ok: false; error: { name: string; message: string } }
@@ -323,7 +272,7 @@ export async function getCategory(
 export type SubmitContactFormArgs = {
 	fullName: string
 	email: string
-	phoneNumber: bigint
+	phoneNumber: number
 	topic: string
 	message: string
 }

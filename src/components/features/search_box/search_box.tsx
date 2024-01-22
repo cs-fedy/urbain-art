@@ -8,7 +8,7 @@ export default function SearchBox({ query }: SearchBoxProps) {
 		"use server"
 		const searchQuery = formData.get("query")
 		if (searchQuery) {
-			redirect(`/search?query=${searchQuery}`)
+			redirect(`/search?query=${searchQuery}&limit=4`)
 		}
 	}
 

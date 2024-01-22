@@ -7,7 +7,6 @@ import { Children, PropsWithChildren, useState } from "react"
 
 type SliderProps = { itemsPerWindow: number }
 
-// TODO: FIX THIS - make it responsive using a better solution
 export default function Slider({
 	itemsPerWindow,
 	children,

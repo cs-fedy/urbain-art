@@ -36,7 +36,7 @@ export default function ContactForm({}: ContactFormProps) {
 	return (
 		<form action={action} className='flex w-full flex-col items-start gap-12'>
 			<div className='flex w-full flex-col items-start'>
-				<label className='text-sm text-urbain-white' htmlFor='full-name'>
+				<label className='text-sm text-urbain-white' htmlFor='fullName'>
 					Nom et prénom
 				</label>
 				<Input
@@ -70,7 +70,7 @@ export default function ContactForm({}: ContactFormProps) {
 				/>
 			</div>
 			<div className='flex w-full flex-col items-start'>
-				<label className='text-sm text-urbain-white' htmlFor='phone-number'>
+				<label className='text-sm text-urbain-white' htmlFor='phoneNumber'>
 					Téléphone
 				</label>
 				<Input
@@ -87,7 +87,7 @@ export default function ContactForm({}: ContactFormProps) {
 				/>
 			</div>
 			<div className='flex w-full flex-col items-start'>
-				<label className='text-sm text-urbain-white' htmlFor='sujet'>
+				<label className='text-sm text-urbain-white' htmlFor='topic'>
 					Sujet
 				</label>
 				<Input
@@ -97,7 +97,7 @@ export default function ContactForm({}: ContactFormProps) {
 							: ""
 					}
 					className='bg-urbain-white focus:bg-urbain-white'
-					id='sujet'
+					id='topic'
 					placeholder='Sujet'
 					name='topic'
 					type='text'
