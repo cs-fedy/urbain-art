@@ -1,6 +1,6 @@
 "use server"
 
-import submitPriceEstimation, { SubmitPriceEstimationResult } from "@/lib/api"
+import { submitPriceEstimation, SubmitPriceEstimationResult } from "@/lib/api"
 import { z } from "zod"
 import parseZodErrors from "@/lib/parse-zod-errors"
 

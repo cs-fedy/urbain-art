@@ -380,13 +380,64 @@ export type SubmitPriceEstimationResult =
 	| { ok: true }
 	| { ok: false; error: { name: string; message: string } }
 
-export default async function submitPriceEstimation(
+export async function submitPriceEstimation(
 	args: SubmitPriceEstimationArgs,
 ): Promise<SubmitPriceEstimationResult> {
 	try {
 		const url = baseStrapiApiUrl + "/api/price-estimations"
 		const response = await fetch(url, {
 			body: JSON.stringify({ data: { ...args } }),
+			headers: { "Content-Type": "application/json" },
+			method: "POST",
+		})
+
+		await response.json()
+		return { ok: true }
+	} catch (e) {
+		const error = e as any
+
+		return {
+			ok: false,
+			error: { name: error.error.name, message: error.error.message },
+		}
+	}
+}
+
+type SubmitCartArgs = {
+	fullName: string
+	email: string
+	phoneNumber: string
+	topic: string
+	message: string
+	cartItems: Array<{
+		productTag: string
+		count: number
+	}>
+}
+
+export type SubmitCartResult =
+	| { ok: true }
+	| { ok: false; error: { name: string; message: string } }
+
+export async function submitCart(
+	args: SubmitCartArgs,
+): Promise<SubmitCartResult> {
+	try {
+		const url = baseStrapiApiUrl + "/api/shopping-carts"
+		const response = await fetch(url, {
+			body: JSON.stringify({
+				data: {
+					...args,
+					full_name: args.fullName,
+					phone_number: args.phoneNumber,
+					cart_items: args.cartItems.map(item => {
+						return {
+							produit: item.productTag,
+							nombre_articles: item.count,
+						}
+					}),
+				},
+			}),
 			headers: { "Content-Type": "application/json" },
 			method: "POST",
 		})
