@@ -6,46 +6,18 @@ import ShoppingCartIcon from "@/components/icons/shopping_cart"
 import Image from "next/image"
 import { Product } from "./types"
 import Link from "next/link"
-import { useEffect, useState } from "react"
-import handleSyncCart from "@/lib/sync-cart"
+import { useCart } from "@/components/features/cart/cart-context"
 
 type ProductItemProps = { product: Product }
 
 export default function ProductItem({ product }: ProductItemProps) {
-	const [count, setCount] = useState(0)
-
-	useEffect(() => {
-		const cart = localStorage.getItem("cart")
-
-		if (cart) {
-			try {
-				const parsedCart = JSON.parse(cart)
-				const products = parsedCart.reduce(
-					(
-						prev: Record<string, number>,
-						curr: { tag: string; count: string },
-					) => {
-						if (!Object.keys(prev).includes(curr.tag))
-							return { ...prev, [curr.tag]: Number.parseInt(curr.count) }
-						return prev
-					},
-					{},
-				)
-
-				const count = products[product.tag]
-				if (count) setCount(count)
-			} catch (e) {
-				localStorage.removeItem("cart")
-			}
-		}
-	}, [product.tag])
+	const { getItem, saveItem } = useCart()
+	const item = getItem(product.tag)
+	const count = item?.count ?? 0
 
 	const handleCountChange = (direction: 1 | -1) => {
-		setCount(prev => {
-			const updatedCount = Math.max(prev + direction)
-			handleSyncCart(product.tag, updatedCount)
-			return updatedCount
-		})
+		const updatedCount = Math.max(count + direction)
+		saveItem({ tag: product.tag, count: updatedCount })
 	}
 
 	return (

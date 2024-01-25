@@ -5,13 +5,12 @@ import Image from "next/image"
 import ShoppingCount from "@/components/features/cart/shopping-count"
 import Icon from "@/components/common/icon"
 import TrashIcon from "@/components/icons/trash"
+import { useCart } from "@/components/features/cart/cart-context"
 
-type CartItemProps = {
-	cartItem: TCartItem
-	handleDelete: (tag: string) => void
-}
+type CartItemProps = { cartItem: TCartItem }
 
-export default function CartItem({ cartItem, handleDelete }: CartItemProps) {
+export default function CartItem({ cartItem }: CartItemProps) {
+	const { deleteItem } = useCart()
 	const { data } = useSWR(cartItem.tag, () =>
 		getProduct({ productTag: cartItem.tag }),
 	)
@@ -36,7 +35,7 @@ export default function CartItem({ cartItem, handleDelete }: CartItemProps) {
 				<ShoppingCount tag={cartItem.tag} />
 			</div>
 			<div className='flex justify-center border border-urbain-black px-8 py-4'>
-				<button type='button' onClick={() => handleDelete(cartItem.tag)}>
+				<button type='button' onClick={() => deleteItem(cartItem.tag)}>
 					<Icon icon={<TrashIcon />} className='h-5 w-5 text-urbain-black' />
 				</button>
 			</div>

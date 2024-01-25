@@ -9,7 +9,7 @@ export default function Input({ className, error, ...rest }: InputProps) {
 			<input
 				{...rest}
 				className={cn(
-					"w-full bg-transparent px-4 py-2 outline-none placeholder:text-sm placeholder:text-gray-500 focus:bg-transparent",
+					"w-full bg-transparent px-4 py-2 outline-none placeholder:text-sm placeholder:text-gray-500 focus:w-full focus:bg-transparent ",
 					className,
 				)}
 			/>

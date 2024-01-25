@@ -3,11 +3,8 @@ import CartItem from "@/components/features/cart/cart-item"
 import { submitContactForm } from "@/lib/api"
 import ContactForm from "@/components/features/contact/contact_form/contact-form"
 
-type CartItemsProps = {
-	cart: Cart
-	handleDelete: (tag: string) => void
-}
-export default function CartItems({ cart, handleDelete }: CartItemsProps) {
+type CartItemsProps = { cart: Cart }
+export default function CartItems({ cart }: CartItemsProps) {
 	return (
 		<div className='flex w-full flex-col items-center gap-y-5'>
 			<div className='hidden w-full grid-cols-4 gap-x-5 md:grid'>
@@ -25,11 +22,7 @@ export default function CartItems({ cart, handleDelete }: CartItemsProps) {
 
 			<div className='flex w-full flex-col items-center gap-5'>
 				{cart.map(item => (
-					<CartItem
-						handleDelete={handleDelete}
-						cartItem={item}
-						key={item.tag}
-					/>
+					<CartItem cartItem={item} key={item.tag} />
 				))}
 			</div>
 

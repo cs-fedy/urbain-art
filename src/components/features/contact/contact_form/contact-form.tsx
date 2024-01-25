@@ -6,7 +6,7 @@ import Box from "@/components/common/box"
 import { useFormState, useFormStatus } from "react-dom"
 import { toast } from "react-toastify"
 import submitContactFormAction from "@/components/features/contact/contact_form/action"
-import { useEffect } from "react"
+import { useEffect, useRef } from "react"
 
 const initialValue = {
 	email: null,
@@ -23,6 +23,7 @@ type ContactFormProps = {
 export default function ContactForm({}: ContactFormProps) {
 	const { pending } = useFormStatus()
 	const [state, action] = useFormState(submitContactFormAction, initialValue)
+	const formRef = useRef<HTMLFormElement>(null)
 
 	useEffect(() => {
 		if (state.ok) {
@@ -34,7 +35,13 @@ export default function ContactForm({}: ContactFormProps) {
 	}, [state])
 
 	return (
-		<form action={action} className='flex w-full flex-col items-start gap-12'>
+		<form
+			ref={formRef}
+			action={data => {
+				action(data)
+				formRef.current?.reset()
+			}}
+			className='flex w-full flex-col items-start gap-12'>
 			<div className='flex w-full flex-col items-start'>
 				<label className='text-sm text-urbain-white' htmlFor='fullName'>
 					Nom et prénom

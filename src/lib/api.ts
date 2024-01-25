@@ -410,7 +410,7 @@ type SubmitCartArgs = {
 	topic: string
 	message: string
 	cartItems: Array<{
-		productTag: string
+		productId: string
 		count: number
 	}>
 }
@@ -432,7 +432,7 @@ export async function submitCart(
 					phone_number: args.phoneNumber,
 					cart_items: args.cartItems.map(item => {
 						return {
-							produit: item.productTag,
+							produit: item.productId,
 							nombre_articles: item.count,
 						}
 					}),

@@ -5,7 +5,7 @@ import TextArea from "@/components/common/text-area"
 import Box from "@/components/common/box"
 import { useFormState, useFormStatus } from "react-dom"
 import submitPriceEstimationAction from "@/components/features/price_estimation/action"
-import { useEffect } from "react"
+import { useEffect, useRef } from "react"
 import { toast } from "react-toastify"
 
 const initialState = {
@@ -19,6 +19,7 @@ const initialState = {
 }
 
 export default function PriceEstimationForm() {
+	const formRef = useRef<HTMLFormElement>(null)
 	const { pending } = useFormStatus()
 	const [state, action] = useFormState(
 		submitPriceEstimationAction,
@@ -36,7 +37,11 @@ export default function PriceEstimationForm() {
 
 	return (
 		<form
-			action={action}
+			ref={formRef}
+			action={data => {
+				action(data)
+				formRef.current?.reset()
+			}}
 			className='flex w-full flex-col items-center gap-y-4 p-4'>
 			<div className='grid w-full grid-cols-1 gap-6 lg:grid-cols-2'>
 				<div className='flex w-full flex-col items-start'>

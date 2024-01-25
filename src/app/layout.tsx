@@ -7,6 +7,7 @@ import { PropsWithChildren } from "react"
 import "./globals.css"
 import { ToastContainer } from "react-toastify"
 import "react-toastify/dist/ReactToastify.css"
+import CartProvider from "@/components/features/cart/cart-context"
 
 const montserrat = Montserrat({
 	subsets: ["latin"],
@@ -25,15 +26,17 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: PropsWithChildren) {
 	return (
-		<html lang='en'>
-			<body className={cn(playfair.variable, montserrat.variable)}>
-				<div className='flex min-h-screen w-full flex-col items-center'>
-					<Navbar />
-					<div className='w-full grow'>{children}</div>
-					<Footer />
-					<ToastContainer />
-				</div>
-			</body>
-		</html>
+		<CartProvider>
+			<html lang='en'>
+				<body className={cn(playfair.variable, montserrat.variable)}>
+					<div className='flex min-h-screen w-full flex-col items-center'>
+						<Navbar />
+						<div className='w-full grow'>{children}</div>
+						<Footer />
+						<ToastContainer />
+					</div>
+				</body>
+			</html>
+		</CartProvider>
 	)
 }

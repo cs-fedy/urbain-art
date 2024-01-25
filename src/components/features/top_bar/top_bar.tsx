@@ -1,10 +1,10 @@
 import FacebookIcon from "@/components/icons/facebook"
 import InstagramIcon from "@/components/icons/instagram"
 import LinkedinIcon from "@/components/icons/linkedin"
-import ShoppingCartIcon from "@/components/icons/shopping_cart"
 import Link from "next/link"
-import Icon from "../common/icon"
-import SearchBox from "./search_box/search_box"
+import Icon from "../../common/icon"
+import SearchBox from "../search_box/search_box"
+import ShoppingIcon from "@/components/features/top_bar/shopping-icon"
 
 export default function TopBar() {
 	return (
@@ -15,19 +15,19 @@ export default function TopBar() {
 
 			<div className='flex w-full items-center gap-x-10 lg:w-auto'>
 				<div className='ml-5 flex items-center gap-x-4'>
-					<Link href='/'>
+					<Link href='/public'>
 						<Icon
 							icon={<FacebookIcon />}
 							className='h-[28px] w-[27px] text-urbain-white'
 						/>
 					</Link>
-					<Link href='/'>
+					<Link href='/public'>
 						<Icon
 							icon={<InstagramIcon />}
 							className='h-[27px] w-[27px] text-urbain-white'
 						/>
 					</Link>
-					<Link href='/'>
+					<Link href='/public'>
 						<Icon
 							icon={<LinkedinIcon />}
 							className='h-[27px] w-[28px] text-urbain-white'
@@ -35,12 +35,7 @@ export default function TopBar() {
 					</Link>
 				</div>
 
-				<Link href='/cart'>
-					<Icon
-						icon={<ShoppingCartIcon />}
-						className='h-[26px] w-[27px] text-urbain-white lg:h-[34px] lg:w-[35px]'
-					/>
-				</Link>
+				<ShoppingIcon />
 			</div>
 		</div>
 	)

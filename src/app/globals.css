@@ -3,17 +3,18 @@
 @tailwind utilities;
 
 * {
-	outline: 1px solid red;
+    outline: 1px solid red;
+    min-width: 0;
 }
 
 @layer base {
-	input[type="number"]::-webkit-inner-spin-button,
-	input[type="number"]::-webkit-outer-spin-button {
-		-webkit-appearance: none;
-		margin: 0;
-	}
+    input[type="number"]::-webkit-inner-spin-button,
+    input[type="number"]::-webkit-outer-spin-button {
+        -webkit-appearance: none;
+        margin: 0;
+    }
 
-	textarea {
-		resize: none;
-	}
+    textarea {
+        resize: none;
+    }
 }

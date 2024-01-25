@@ -5,6 +5,7 @@ import Icon from "@/components/common/icon"
 import Input from "@/components/common/input"
 import MagnifyingGlassIcon from "@/components/icons/magnifying-glass"
 import { useFormState } from "react-dom"
+import { useRef } from "react"
 
 type WrappedSearchBoxProps = {
 	query?: string
@@ -18,9 +19,16 @@ export default function WrappedSearchBox({
 	formAction,
 }: WrappedSearchBoxProps) {
 	const [state, action] = useFormState(formAction, initialValue)
+	const formRef = useRef<HTMLFormElement>(null)
 
 	return (
-		<form action={action} className='relative flex w-full items-center'>
+		<form
+			ref={formRef}
+			action={data => {
+				action(data)
+				formRef.current?.reset()
+			}}
+			className='relative flex w-full items-center'>
 			<Input
 				name='query'
 				defaultValue={query ?? ""}

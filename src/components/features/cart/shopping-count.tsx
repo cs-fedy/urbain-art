@@ -4,46 +4,19 @@ import Box from "@/components/common/box"
 import Icon from "@/components/common/icon"
 import ChevronLeftIcon from "@/components/icons/chevron-left"
 import ChevronRightIcon from "@/components/icons/chevron_right"
-import React, { useEffect, useState } from "react"
-import handleSyncCart from "@/lib/sync-cart"
+import React from "react"
+import { useCart } from "@/components/features/cart/cart-context"
 
 type ShoppingCountProps = { tag: string }
 
 export default function ShoppingCount({ tag }: ShoppingCountProps) {
-	const [count, setCount] = useState(0)
-
-	useEffect(() => {
-		const cart = localStorage.getItem("cart")
-
-		if (cart) {
-			try {
-				const parsedCart = JSON.parse(cart)
-				const products = parsedCart.reduce(
-					(
-						prev: Record<string, number>,
-						curr: { tag: string; count: string },
-					) => {
-						if (!Object.keys(prev).includes(curr.tag))
-							return { ...prev, [curr.tag]: Number.parseInt(curr.count) }
-						return prev
-					},
-					{},
-				)
-
-				const count = products[tag]
-				if (count) setCount(count)
-			} catch (e) {
-				localStorage.removeItem("cart")
-			}
-		}
-	}, [tag])
+	const { getItem, saveItem } = useCart()
+	const item = getItem(tag)
+	const count = item?.count ?? 0
 
 	const handleCountChange = (direction: 1 | -1) => {
-		setCount(prev => {
-			const updatedCount = Math.max(prev + direction)
-			handleSyncCart(tag, updatedCount)
-			return updatedCount
-		})
+		const updatedCount = Math.max(count + direction)
+		saveItem({ tag, count: updatedCount })
 	}
 
 	return (

@@ -7,7 +7,7 @@ import { JoinNewsletterResult } from "@/lib/api"
 import Image from "next/image"
 import { useFormState, useFormStatus } from "react-dom"
 import { toast } from "react-toastify"
-import { useEffect } from "react"
+import { useEffect, useRef } from "react"
 
 type NewsletterFormWrapperProps = {
 	formAction: (state: any, formData: FormData) => Promise<JoinNewsletterResult>
@@ -20,6 +20,7 @@ export default function WrappedNewsletter({
 }: NewsletterFormWrapperProps) {
 	const { pending } = useFormStatus()
 	const [state, action] = useFormState(formAction, initialValue)
+	const formRef = useRef<HTMLFormElement>(null)
 
 	useEffect(() => {
 		if (state.ok) {
@@ -53,7 +54,11 @@ export default function WrappedNewsletter({
 				</div>
 
 				<form
-					action={action}
+					ref={formRef}
+					action={data => {
+						action(data)
+						formRef.current?.reset()
+					}}
 					className='flex w-full flex-col items-center space-y-8 lg:w-3/4 lg:items-start'>
 					<Input
 						type='email'
