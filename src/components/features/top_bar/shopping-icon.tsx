@@ -17,9 +17,11 @@ export default function ShoppingIcon() {
 					className='h-[26px] w-[27px] text-urbain-white lg:h-[34px] lg:w-[35px]'
 				/>
 
-				<span className='flex h-7 w-7 items-center justify-center rounded-full bg-urbain-orange text-urbain-white'>
-					{count > 9 ? "+9" : count}
-				</span>
+				{count !== 0 && (
+					<span className='flex h-7 w-7 items-center justify-center rounded-full bg-urbain-orange text-urbain-white'>
+						{count > 9 ? "+9" : count}
+					</span>
+				)}
 			</div>
 		</Link>
 	)
