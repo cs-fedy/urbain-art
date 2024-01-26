@@ -1,13 +1,13 @@
 "use server"
 
-import { submitContactForm, SubmitContactFormResult } from "@/lib/api"
+import { submitCart, SubmitCartResult } from "@/lib/api"
 import { z } from "zod"
 import parseZodErrors from "@/lib/parse-zod-errors"
 
-export default async function submitContactFormAction(
+export default async function submitCartAction(
 	initialState: any,
 	formData: FormData,
-): Promise<SubmitContactFormResult> {
+): Promise<SubmitCartResult> {
 	const schema = z.object({
 		fullName: z.string({
 			required_error: "le nom et le prénom sont obligatoires",
@@ -31,7 +31,15 @@ export default async function submitContactFormAction(
 			required_error: "Le numéro de téléphone est obligatoire",
 			invalid_type_error: "Le numéro de téléphone n'est pas valide",
 		}),
+		cartItems: z.array(
+			z.object({
+				productId: z.string(),
+				count: z.number(),
+			}),
+		),
 	})
+
+	const cartItems = formData.get("cartItems")?.toString()
 
 	const args = {
 		fullName: formData.get("fullName"),
@@ -39,10 +47,11 @@ export default async function submitContactFormAction(
 		topic: formData.get("topic"),
 		message: formData.get("message"),
 		phoneNumber: formData.get("phoneNumber"),
+		cartItems: cartItems ? JSON.parse(cartItems) : [],
 	}
 
+	console.log(args)
 	const result = schema.safeParse(args)
-
 	if (!result.success) {
 		const parsedError = parseZodErrors(result.error.errors)
 
@@ -58,5 +67,5 @@ export default async function submitContactFormAction(
 		}
 	}
 
-	return await submitContactForm(result.data as any)
+	return submitCart(result.data as any)
 }

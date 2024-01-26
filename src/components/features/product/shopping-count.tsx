@@ -17,7 +17,7 @@ export default function ShoppingCount({ tag }: ShoppingCountProps) {
 
 	const handleCountChange = (direction: 1 | -1) => {
 		const updatedCount = Math.max(count + direction)
-		saveItem({ tag, count: updatedCount })
+		saveItem({ tag, count: updatedCount, id: item?.id as number })
 	}
 
 	return (

@@ -16,11 +16,7 @@ const initialValue = {
 	message: null,
 }
 
-type ContactFormProps = {
-	submitContactFormAction: (initialState: any, formData: FormData) => void
-}
-
-export default function ContactForm({}: ContactFormProps) {
+export default function ContactForm() {
 	const { pending } = useFormStatus()
 	const [state, action] = useFormState(submitContactFormAction, initialValue)
 	const formRef = useRef<HTMLFormElement>(null)
@@ -35,106 +31,112 @@ export default function ContactForm({}: ContactFormProps) {
 	}, [state])
 
 	return (
-		<form
-			ref={formRef}
-			action={data => {
-				action(data)
-				formRef.current?.reset()
-			}}
-			className='flex w-full flex-col items-start gap-12'>
-			<div className='flex w-full flex-col items-start'>
-				<label className='text-sm text-urbain-white' htmlFor='fullName'>
-					Nom et prénom
-				</label>
-				<Input
-					error={
-						state.ok === false && state.error.name === "fullName"
-							? state.error.message
-							: ""
-					}
-					className='bg-urbain-white focus:bg-urbain-white'
-					id='full-name'
-					placeholder='Nom'
-					name='fullName'
-					type='text'
-				/>
-			</div>
-			<div className='flex w-full flex-col items-start'>
-				<label className='text-sm text-urbain-white' htmlFor='email'>
-					Email
-				</label>
-				<Input
-					error={
-						state.ok === false && state.error.name === "email"
-							? state.error.message
-							: ""
-					}
-					className='bg-urbain-white focus:bg-urbain-white'
-					id='email'
-					placeholder='Email'
-					name='email'
-					type='email'
-				/>
-			</div>
-			<div className='flex w-full flex-col items-start'>
-				<label className='text-sm text-urbain-white' htmlFor='phoneNumber'>
-					Téléphone
-				</label>
-				<Input
-					error={
-						state.ok === false && state.error.name === "phoneNumber"
-							? state.error.message
-							: ""
-					}
-					className='bg-urbain-white focus:bg-urbain-white'
-					id='phone-number'
-					placeholder='Téléphone'
-					name='phoneNumber'
-					type='number'
-				/>
-			</div>
-			<div className='flex w-full flex-col items-start'>
-				<label className='text-sm text-urbain-white' htmlFor='topic'>
-					Sujet
-				</label>
-				<Input
-					error={
-						state.ok === false && state.error.name === "topic"
-							? state.error.message
-							: ""
-					}
-					className='bg-urbain-white focus:bg-urbain-white'
-					id='topic'
-					placeholder='Sujet'
-					name='topic'
-					type='text'
-				/>
-			</div>
-			<div className='flex w-full flex-col items-start'>
-				<label className='text-sm text-urbain-white' htmlFor='message'>
-					Votre message
-				</label>
-				<TextArea
-					error={
-						state.ok === false && state.error.name === "message"
-							? state.error.message
-							: ""
-					}
-					className='bg-urbain-white focus:bg-urbain-white'
-					id='message'
-					placeholder='Votre message'
-					name='message'
-				/>
-			</div>
+		<div className='flex w-full flex-col items-start gap-14 bg-urbain-black px-12 py-8 lg:w-1/2 lg:px-24 lg:py-16'>
+			<h2 className='w-full text-center font-play-fair text-2xl leading-snug tracking-wider text-urbain-white md:text-3xl lg:max-w-2xl lg:text-4xl'>
+				Contactez-nous
+			</h2>
 
-			<Box
-				disabled={pending}
-				component='button'
-				variant='primary'
-				className='w-full'
-				type='submit'>
-				<span className='w-full text-center'>Envoyer</span>
-			</Box>
-		</form>
+			<form
+				ref={formRef}
+				action={data => {
+					action(data)
+					formRef.current?.reset()
+				}}
+				className='flex w-full flex-col items-start gap-12'>
+				<div className='flex w-full flex-col items-start'>
+					<label className='text-sm text-urbain-white' htmlFor='fullName'>
+						Nom et prénom
+					</label>
+					<Input
+						error={
+							state.ok === false && state.error.name === "fullName"
+								? state.error.message
+								: ""
+						}
+						className='bg-urbain-white focus:bg-urbain-white'
+						id='full-name'
+						placeholder='Nom'
+						name='fullName'
+						type='text'
+					/>
+				</div>
+				<div className='flex w-full flex-col items-start'>
+					<label className='text-sm text-urbain-white' htmlFor='email'>
+						Email
+					</label>
+					<Input
+						error={
+							state.ok === false && state.error.name === "email"
+								? state.error.message
+								: ""
+						}
+						className='bg-urbain-white focus:bg-urbain-white'
+						id='email'
+						placeholder='Email'
+						name='email'
+						type='email'
+					/>
+				</div>
+				<div className='flex w-full flex-col items-start'>
+					<label className='text-sm text-urbain-white' htmlFor='phoneNumber'>
+						Téléphone
+					</label>
+					<Input
+						error={
+							state.ok === false && state.error.name === "phoneNumber"
+								? state.error.message
+								: ""
+						}
+						className='bg-urbain-white focus:bg-urbain-white'
+						id='phone-number'
+						placeholder='Téléphone'
+						name='phoneNumber'
+						type='number'
+					/>
+				</div>
+				<div className='flex w-full flex-col items-start'>
+					<label className='text-sm text-urbain-white' htmlFor='topic'>
+						Sujet
+					</label>
+					<Input
+						error={
+							state.ok === false && state.error.name === "topic"
+								? state.error.message
+								: ""
+						}
+						className='bg-urbain-white focus:bg-urbain-white'
+						id='topic'
+						placeholder='Sujet'
+						name='topic'
+						type='text'
+					/>
+				</div>
+				<div className='flex w-full flex-col items-start'>
+					<label className='text-sm text-urbain-white' htmlFor='message'>
+						Votre message
+					</label>
+					<TextArea
+						error={
+							state.ok === false && state.error.name === "message"
+								? state.error.message
+								: ""
+						}
+						className='bg-urbain-white focus:bg-urbain-white'
+						id='message'
+						placeholder='Votre message'
+						name='message'
+					/>
+				</div>
+
+				<Box
+					disabled={pending}
+					component='button'
+					variant='primary'
+					className='w-full'
+					type='submit'>
+					<span className='w-full text-center'>Envoyer</span>
+				</Box>
+			</form>
+		</div>
 	)
 }

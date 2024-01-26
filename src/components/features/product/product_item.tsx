@@ -17,7 +17,7 @@ export default function ProductItem({ product }: ProductItemProps) {
 
 	const handleCountChange = (direction: 1 | -1) => {
 		const updatedCount = Math.max(count + direction)
-		saveItem({ tag: product.tag, count: updatedCount })
+		saveItem({ tag: product.tag, count: updatedCount, id: product.id })
 	}
 
 	return (

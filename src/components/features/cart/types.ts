@@ -1,4 +1,5 @@
 export type CartItem = {
+	id: number
 	tag: string
 	count: number
 }
