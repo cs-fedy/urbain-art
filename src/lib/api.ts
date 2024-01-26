@@ -372,7 +372,7 @@ export type SubmitPriceEstimationArgs = {
 	topic: string
 	company_name: string
 	tax_number?: string
-	product: string
+	attached_file: number
 	request: string
 }
 
@@ -444,6 +444,38 @@ export async function submitCart(
 
 		await response.json()
 		return { ok: true }
+	} catch (e) {
+		const error = e as any
+
+		return {
+			ok: false,
+			error: { name: error.error.name, message: error.error.message },
+		}
+	}
+}
+
+export type UploadFileResult =
+	| { ok: true; data: { fileId: number } }
+	| { ok: false; error: { name: string; message: string } }
+
+export async function uploadFile(
+	formData: FormData,
+): Promise<UploadFileResult> {
+	try {
+		const url = baseStrapiApiUrl + "/api/upload"
+		const response = await fetch(url, {
+			body: formData,
+			method: "POST",
+		})
+
+		const data = await response.json()
+		if (data.length <= 0)
+			return {
+				ok: false,
+				error: { name: "attached-file", message: "no uploaded file" },
+			}
+
+		return { ok: true, data: { fileId: data[0].id } }
 	} catch (e) {
 		const error = e as any
 

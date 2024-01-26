@@ -22,7 +22,7 @@ export default async function CategoryProducts({
 	const products = productsResponse.ok ? productsResponse.data.products : []
 
 	return (
-		<div className='relative w-full overflow-hidden  pt-[4.75rem] lg:pt-0'>
+		<div className='relative w-full overflow-hidden pt-[4.75rem] lg:pt-0'>
 			<div className='absolute -bottom-28 -left-48 z-0 h-[54rem] w-[45rem]'>
 				<Image src={grayLogo} alt='urbain art gray logo' fill />
 			</div>

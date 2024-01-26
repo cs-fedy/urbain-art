@@ -33,7 +33,7 @@ export default async function submitCartAction(
 		}),
 		cartItems: z.array(
 			z.object({
-				productId: z.string(),
+				productId: z.number(),
 				count: z.number(),
 			}),
 		),
@@ -50,8 +50,8 @@ export default async function submitCartAction(
 		cartItems: cartItems ? JSON.parse(cartItems) : [],
 	}
 
-	console.log(args)
 	const result = schema.safeParse(args)
+
 	if (!result.success) {
 		const parsedError = parseZodErrors(result.error.errors)
 

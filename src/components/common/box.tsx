@@ -23,8 +23,8 @@ export default function Box<T extends ElementType = "span">({
 			{...rest}
 			className={cn(
 				"flex items-center space-x-3 rounded-md px-6 py-3 font-montserrat text-xs font-normal leading-normal tracking-normal text-urbain-white lg:text-sm",
-				variant === "primary" && "bg-urbain-orange hover:bg-orange-700",
-				variant === "secondary" && "bg-urbain-black hover:bg-slate-900",
+				variant === "primary" && "bg-urbain-orange hover:bg-slate-900",
+				variant === "secondary" && "bg-urbain-black hover:bg-orange-700",
 				className,
 			)}>
 			{children}

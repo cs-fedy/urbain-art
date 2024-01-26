@@ -1,6 +1,10 @@
 "use server"
 
-import { submitPriceEstimation, SubmitPriceEstimationResult } from "@/lib/api"
+import {
+	submitPriceEstimation,
+	SubmitPriceEstimationResult,
+	uploadFile,
+} from "@/lib/api"
 import { z } from "zod"
 import parseZodErrors from "@/lib/parse-zod-errors"
 
@@ -8,6 +12,25 @@ export default async function submitPriceEstimationAction(
 	initialState: any,
 	formData: FormData,
 ): Promise<SubmitPriceEstimationResult> {
+	const fileData = formData.get("attached-file")
+	if (!fileData)
+		return {
+			ok: false,
+			error: { name: "attached-file", message: "attached file not found" },
+		}
+
+	const data = new FormData()
+	data.append("files", fileData)
+	const uploadedFileResult = await uploadFile(data)
+	if (!uploadedFileResult.ok)
+		return {
+			ok: false,
+			error: {
+				message: uploadedFileResult.error.message,
+				name: uploadedFileResult.error.name,
+			},
+		}
+
 	const schema = z.object({
 		fullName: z.string({
 			required_error: "le nom et le prénom sont obligatoires",
@@ -26,10 +49,6 @@ export default async function submitPriceEstimationAction(
 		company: z.string({
 			required_error: "Le nom de l'entreprise est obligatoire",
 			invalid_type_error: "Le nom de l'entreprise n'est pas valide",
-		}),
-		product: z.string({
-			required_error: "Le titre du produit est obligatoire",
-			invalid_type_error: "Le titre du produit n'est pas valide",
 		}),
 		request: z.string({
 			required_error: "La demande est obligatoire",
@@ -70,5 +89,6 @@ export default async function submitPriceEstimationAction(
 		full_name: result.data.fullName,
 		tax_number: result.data.taxNumber,
 		company_name: result.data.company,
+		attached_file: uploadedFileResult.data.fileId,
 	})
 }

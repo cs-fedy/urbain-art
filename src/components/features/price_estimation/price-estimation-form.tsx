@@ -5,8 +5,10 @@ import TextArea from "@/components/common/text-area"
 import Box from "@/components/common/box"
 import { useFormState, useFormStatus } from "react-dom"
 import submitPriceEstimationAction from "@/components/features/price_estimation/action"
-import { useEffect, useRef } from "react"
+import { useEffect, useRef, useState } from "react"
 import { toast } from "react-toastify"
+import UploadFile from "@/components/common/file-upload"
+import getFileDetails from "@/lib/get-file-details"
 
 const initialState = {
 	fullName: null,
@@ -19,6 +21,7 @@ const initialState = {
 }
 
 export default function PriceEstimationForm() {
+	const [file, setFile] = useState<File | null>(null)
 	const formRef = useRef<HTMLFormElement>(null)
 	const { pending } = useFormStatus()
 	const [state, action] = useFormState(
@@ -39,8 +42,11 @@ export default function PriceEstimationForm() {
 		<form
 			ref={formRef}
 			action={data => {
+				file && data.append("attached-file", file)
+
 				action(data)
 				formRef.current?.reset()
+				setFile(null)
 			}}
 			className='flex w-full flex-col items-center gap-y-4 p-4'>
 			<div className='grid w-full grid-cols-1 gap-6 lg:grid-cols-2'>
@@ -131,19 +137,9 @@ export default function PriceEstimationForm() {
 
 				<div className='flex w-full flex-col items-start'>
 					<label className='text-sm text-urbain-black' htmlFor='product'>
-						Produit *
+						Pièce jointe *
 					</label>
-					<Input
-						error={
-							state.ok === false && state.error.name === "product"
-								? state.error.message
-								: ""
-						}
-						className='border border-gray-200'
-						id='product'
-						name='product'
-						type='text'
-					/>
+					<UploadFile setFile={setFile} fileDetails={getFileDetails(file)} />
 				</div>
 			</div>
 
