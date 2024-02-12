@@ -8,7 +8,7 @@ export default function Services() {
 		<div className='relative w-full overflow-hidden bg-urbain-black bg-no-repeat pt-[4.75rem] lg:min-h-screen lg:bg-services lg:pt-0'>
 			<div className='absolute inset-0 z-10 bg-urbain-black/80' />
 
-			<div className='relative z-20 mx-auto flex h-full w-4/5 flex-col items-center gap-y-16 py-16 lg:pt-44'>
+			<div className='relative z-20 mx-auto flex h-full w-4/5 flex-col items-center gap-y-16 py-16 lg:pt-56'>
 				<div className='flex flex-col items-center gap-y-10'>
 					<h1 className='w-full text-center font-play-fair text-3xl leading-snug tracking-wider text-urbain-white sm:text-4xl md:text-5xl lg:max-w-2xl lg:text-6xl'>
 						A propos Urbain Art

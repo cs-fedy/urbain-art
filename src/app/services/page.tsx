@@ -5,19 +5,19 @@ import Newsletter from "@/components/features/newsletter/newsletter"
 
 let SERVICES = [
 	{
-		img: "/images/s-1.jpeg",
+		img: "/images/service_one.jpg",
 		title: "Agencement personnalisé d'espaces.",
 		description:
 			"Création de solutions sur mesure pour optimiser votre espace.",
 	},
 	{
-		img: "/images/s-2.jpeg",
+		img: "/images/service_two.jpg",
 		title: "Installation de mobilier de bureau",
 		description:
 			"Fourniture et montage de mobilier de qualité pour un environnement detravail efficace.",
 	},
 	{
-		img: "/images/s-3.jpeg",
+		img: "/images/service_three.jpg",
 		title: "Conception d'espaces de réunion",
 		description:
 			" Aménagement de salles de réunion fonctionnelles et esthétiques pour vosbesoins professionnels.",
@@ -26,7 +26,7 @@ let SERVICES = [
 
 export default function ServicePage() {
 	return (
-		<div className='mt-28 w-full lg:mb-10 lg:mt-48'>
+		<div className='mt-28 w-full lg:mt-48'>
 			<div className='mx-auto w-10/12'>
 				<div className='hidden justify-around gap-4 lg:flex'>
 					{SERVICES.map(service => (

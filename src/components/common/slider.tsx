@@ -32,7 +32,7 @@ export default function Slider({
 		})
 
 	return (
-		<div className='relative z-10 flex w-full flex-col items-end space-y-4 lg:ml-20'>
+		<div className='relative z-10 flex w-full flex-col items-end space-y-4'>
 			<div className='mx-auto grid w-3/5 grid-cols-1 gap-4 md:w-3/5 lg:w-full lg:grid-cols-4'>
 				{items.slice(offset, offset + itemsPerWindow).map(child => child)}
 			</div>

@@ -15,7 +15,7 @@ export default async function CategoryPage({
 	if (!category.ok) return notFound()
 
 	return (
-		<div className='w-full'>
+		<div className='mt-10 w-full'>
 			<CategoryProducts category={category.data.category} limit={limit ?? 4} />
 		</div>
 	)

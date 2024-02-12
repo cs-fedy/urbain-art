@@ -18,7 +18,7 @@ export default function CartItem({ cartItem }: CartItemProps) {
 
 	return (
 		<div className='grid w-full grid-cols-1 gap-x-5 md:grid-cols-4'>
-			<div className='flex justify-center border border-urbain-black px-8 py-4'>
+			<div className='flex justify-center px-8 py-4'>
 				<Image
 					width={119}
 					height={109}
@@ -27,14 +27,14 @@ export default function CartItem({ cartItem }: CartItemProps) {
 				/>
 			</div>
 
-			<div className='flex items-center justify-center border border-urbain-black px-8 py-4 text-sm text-urbain-black'>
+			<div className='flex items-center justify-center px-8 py-4 text-sm text-urbain-black'>
 				{data.data.product.title}
 			</div>
 
-			<div className='flex justify-center border border-urbain-black px-8 py-4'>
+			<div className='flex justify-center px-8 py-4'>
 				<ShoppingCount tag={cartItem.tag} />
 			</div>
-			<div className='flex justify-center border border-urbain-black px-8 py-4'>
+			<div className='flex justify-center px-8 py-4'>
 				<button type='button' onClick={() => deleteItem(cartItem.tag)}>
 					<Icon icon={<TrashIcon />} className='h-5 w-5 text-urbain-black' />
 				</button>
